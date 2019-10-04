@@ -1,0 +1,14 @@
+# inherit_from: ../.rubocop.yml
+
+AllCops:
+  Exclude:
+    - "vendor/**/*"
+    - "spec/fixtures/**/*"
+    - "tmp/**/*"
+  TargetRubyVersion: 2.3
+
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
