@@ -12,3 +12,9 @@ Style/Documentation:
 
 Style/DocumentationMethod:
   Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
