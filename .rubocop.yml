@@ -18,3 +18,9 @@ Style/SymbolArray:
 
 Style/WordArray:
   Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 50

@@ -6,8 +6,8 @@ class QuotesController < ApplicationController
   # GET /quotes
   # GET /quotes.json
   def index
-    # @quotes = Quote.all
-    @quotes = Quote.order(:passage).page params[:page]
+    sorted_quotes = Quote.all.sort_by { |q| q.author.sortable_name }
+    @quotes = Kaminari.paginate_array(sorted_quotes).page params[:page]
   end
 
   # GET /quotes/{uuid}
@@ -47,15 +47,11 @@ class QuotesController < ApplicationController
   def update
     respond_to do |format|
       if @quote.update(quote_params)
-        format.html {
-          redirect_to @quote, notice: 'Quote was successfully updated.'
-        }
+        format.html { redirect_to @quote, notice: 'Quote was successfully updated.' }
         format.json { render :show, status: :ok, location: @quote }
       else
         format.html { render :edit }
-        format.json { 
-          render json: @quote.errors, status: :unprocessable_entity
-        }
+        format.json { render json: @quote.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -71,12 +67,12 @@ class QuotesController < ApplicationController
   end
 
   private
-    def set_quote
-      @quote = Quote.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def quote_params
-      params.fetch(:quote, {}).permit(:passage, :author_id)
-    end
+  def set_quote
+    @quote = Quote.find(params[:id])
+  end
+
+  def quote_params
+    params.fetch(:quote, {}).permit(:passage, :author_id)
+  end
 end
