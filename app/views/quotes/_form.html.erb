@@ -12,7 +12,14 @@
   <% end %>
   <div class="input-fields">
     <%= form.text_field :passage %>
-
+    <%= collection_select(
+      :quote, 
+      :author_id, 
+      Author.by_surname, 
+      :id, 
+      :stylized_name, 
+      { prompt: true }
+    )%>
   </div>
 
   <div class="actions">

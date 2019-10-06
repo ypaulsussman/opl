@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2019_10_03_234019) do
   enable_extension "plpgsql"
 
   create_table "authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "quotes_count", default: 0, null: false
