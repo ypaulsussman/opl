@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Authors</h1>
-<%= paginate @authors %>
+<span><%= link_to 'New Author', new_author_path %></span>
+<span><%= link_to 'See All Quotes', quotes_path %></span>
+
+<%= paginate @authors, window: 1, outer_window: 3 %>
+
 <table>
   <thead>
     <tr>
@@ -15,7 +19,6 @@
         <td><%= author.name%> - <%= pluralize(author.quotes_count, 'quote')%></td>
         <td><%= link_to 'Show All Quotes', author %></td>
         <td><%= link_to 'Edit Author', edit_author_path(author) %></td>
-        <td><%= link_to 'Remove Author', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,4 +26,3 @@
 
 <br>
 
-<%= link_to 'New Author', new_author_path %>

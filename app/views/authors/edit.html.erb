@@ -19,5 +19,5 @@
   </tbody>
 </table>
 
-<%= link_to 'Show', @author %> |
+<%= link_to 'Remove Author', @author, method: :delete, data: { confirm: 'Are you sure? This will also remove all their quotes.' } %>
 <%= link_to 'Back', url_options=:back %>

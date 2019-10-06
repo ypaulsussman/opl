@@ -6,8 +6,7 @@ class QuotesController < ApplicationController
   # GET /quotes
   # GET /quotes.json
   def index
-    sorted_quotes = Quote.all.sort_by { |q| q.author.sortable_name }
-    @quotes = Kaminari.paginate_array(sorted_quotes).page params[:page]
+    @quotes = Quote.joins(:author).order(:sortable_name).page(params[:page])
   end
 
   # GET /quotes/{uuid}
@@ -23,7 +22,7 @@ class QuotesController < ApplicationController
 
   # GET /quotes/{uuid}/edit
   def edit
-    @all_authors = Author.by_surname
+    @all_authors = Author.order(:sortable_name)
   end
 
   # POST /quotes

@@ -17,7 +17,7 @@
       <%= collection_select(
         :quote, 
         :author_id, 
-        Author.by_surname, 
+        Author.order(:sortable_name), 
         :id, 
         :name
       )%>
