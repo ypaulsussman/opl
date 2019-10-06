@@ -10,18 +10,18 @@
       </ul>
     </div>
   <% end %>
-  <div class="input-fields">
-    <%= form.text_field :passage %>
-    <%= collection_select(
-      :quote, 
-      :author_id, 
-      Author.by_surname, 
-      :id, 
-      :name
-    )%>
-  </div>
 
   <div class="actions">
+    <div class="input-fields">
+      <%= form.text_field :passage %>
+      <%= collection_select(
+        :quote, 
+        :author_id, 
+        Author.by_surname, 
+        :id, 
+        :name
+      )%>
+    </div>
     <%= form.submit %>
   </div>
 <% end %>

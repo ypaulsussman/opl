@@ -13,10 +13,9 @@
   <tbody>
     <% @quotes.each do |quote| %>
       <tr>
-        <td>"<em><%= quote.passage%></em>" - <span><%=quote.author.name%></span></td>
-        <td><%= link_to 'Show', quote %></td>
-        <td><%= link_to 'Edit', edit_quote_path(quote) %></td>
-        <td><%= link_to 'Destroy', quote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>"<em><%= quote.passage%></em>" - <span><%= link_to "#{quote.author.name}", quote.author %></span></td>
+        <td><%= link_to 'Edit Quote', edit_quote_path(quote) %></td>
+        <td><%= link_to 'Remove Quote', quote, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

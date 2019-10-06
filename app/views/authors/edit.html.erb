@@ -1,0 +1,23 @@
+<h1>Editing Author</h1>
+
+<%= render 'form', author: @author %>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @author.quotes.each do |quote| %>
+      <tr>
+        <td>"<em><%= quote.passage%></em>"</td>
+        <td><%= link_to 'Edit Quote', edit_quote_path(quote) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Show', @author %> |
+<%= link_to 'Back', url_options=:back %>
