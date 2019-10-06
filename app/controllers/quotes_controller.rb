@@ -10,9 +10,10 @@ class QuotesController < ApplicationController
     @quotes = Quote.order(:passage).page params[:page]
   end
 
-  # GET /quotes/1
-  # GET /quotes/1.json
+  # GET /quotes/{uuid}
+  # GET /quotes/{uuid}.json
   def show
+    puts "My params!: #{params}"
   end
 
   # GET /quotes/new
@@ -20,8 +21,9 @@ class QuotesController < ApplicationController
     @quote = Quote.new
   end
 
-  # GET /quotes/1/edit
+  # GET /quotes/{uuid}/edit
   def edit
+    @all_authors = Author.by_surname
   end
 
   # POST /quotes
@@ -40,22 +42,26 @@ class QuotesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /quotes/1
-  # PATCH/PUT /quotes/1.json
+  # PATCH/PUT /quotes/{uuid}
+  # PATCH/PUT /quotes/{uuid}.json
   def update
     respond_to do |format|
       if @quote.update(quote_params)
-        format.html { redirect_to @quote, notice: 'Quote was successfully updated.' }
+        format.html {
+          redirect_to @quote, notice: 'Quote was successfully updated.'
+        }
         format.json { render :show, status: :ok, location: @quote }
       else
         format.html { render :edit }
-        format.json { render json: @quote.errors, status: :unprocessable_entity }
+        format.json { 
+          render json: @quote.errors, status: :unprocessable_entity
+        }
       end
     end
   end
 
-  # DELETE /quotes/1
-  # DELETE /quotes/1.json
+  # DELETE /quotes/{uuid}
+  # DELETE /quotes/{uuid}.json
   def destroy
     @quote.destroy
     respond_to do |format|
@@ -65,13 +71,12 @@ class QuotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_quote
       @quote = Quote.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quote_params
-      params.fetch(:quote, {})
+      params.fetch(:quote, {}).permit(:passage)
     end
 end

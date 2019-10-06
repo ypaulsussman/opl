@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_quote_path(@quote) %> |
-<%= link_to 'Back', quotes_path %>
+"<em><%= @quote.passage %></em>" - <span><%=@quote.author.name%></span>
+<div>
+  <%= link_to 'Edit', edit_quote_path(@quote) %> |
+  <%= link_to 'Back', quotes_path %>
+</div>
