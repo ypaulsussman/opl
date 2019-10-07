@@ -4,7 +4,10 @@ class AuthorsController < ApplicationController
   # GET /authors
   # GET /authors.json
   def index
-    @authors = Author.order(quotes_count: :desc).page params[:page]
+    @authors =
+      Author
+      .order(quotes_count: :desc, sortable_name: :asc)
+      .page(params[:page])
   end
 
   # GET /authors/{uuid}

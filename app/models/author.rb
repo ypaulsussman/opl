@@ -7,6 +7,7 @@ class Author < ApplicationRecord
   def build_sortable_name
     return unless name_changed? || new_record?
 
-    self.sortable_name = "#{name.split[-1].downcase} #{name.split[0].downcase}"
+    sort_tokens = name.downcase.split
+    self.sortable_name = "#{sort_tokens[-1]} #{sort_tokens[0]}"
   end
 end
