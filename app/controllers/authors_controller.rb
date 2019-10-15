@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
 
@@ -12,8 +14,7 @@ class AuthorsController < ApplicationController
 
   # GET /authors/{uuid}
   # GET /authors/{uuid}.json
-  def show
-  end
+  def show; end
 
   # GET /authors/new
   def new
@@ -21,8 +22,7 @@ class AuthorsController < ApplicationController
   end
 
   # GET /authors/{uuid}/edit
-  def edit
-  end
+  def edit; end
 
   # POST /authors
   # POST /authors.json
@@ -57,7 +57,7 @@ class AuthorsController < ApplicationController
   # DELETE /authors/{uuid}
   # DELETE /authors/{uuid}.json
   def destroy
-    @author.destroy
+    @author.destroy!
     respond_to do |format|
       format.html { redirect_to authors_url, notice: 'Author was successfully destroyed.' }
       format.json { head :no_content }
@@ -65,6 +65,7 @@ class AuthorsController < ApplicationController
   end
 
   private
+
   def set_author
     @author = Author.find(params[:id])
   end

@@ -26,3 +26,7 @@ quotes.each do |row|
   Quote.create!(passage: row['Quote'], author: a)
   puts "Added quote by #{author}..."
 end
+
+User.create!(name: 'readonly peasant', email: 'user@example.com')
+
+User.create!(name: 'capn quotes', email: 'admin@example.com')

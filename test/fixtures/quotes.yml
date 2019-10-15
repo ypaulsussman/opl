@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  passage: MyString
+  passage: "this is a very, very real quote"
   author: one
 
 two:
-  passage: MyString
+  passage: "this quotation is also exceptionally real"
   author: two

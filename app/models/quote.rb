@@ -18,10 +18,10 @@ class Quote < ApplicationRecord
   end
 
   def remove_orphan_author
-    @orphan_author.destroy! unless @orphan_author.blank?
+    @orphan_author.destroy unless @orphan_author.blank?
   end
 
   def remove_silent_authors
-    author.destroy! unless author.quotes_count.positive?
+    author.destroy unless author.quotes_count.positive?
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class AuthorsControllerTest < ActionDispatch::IntegrationTest
@@ -5,40 +7,40 @@ class AuthorsControllerTest < ActionDispatch::IntegrationTest
     @author = authors(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get authors_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_author_url
     assert_response :success
   end
 
-  test "should create author" do
+  test 'should create author' do
     assert_difference('Author.count') do
-      post authors_url, params: { author: {  } }
+      post authors_url, params: { author: { name: 'filward millenary' } }
     end
-
-    assert_redirected_to author_url(Author.last)
+    newest_author = Author.order(created_at: :asc).last
+    assert_redirected_to author_url(newest_author)
   end
 
-  test "should show author" do
+  test 'should show author' do
     get author_url(@author)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_author_url(@author)
     assert_response :success
   end
 
-  test "should update author" do
-    patch author_url(@author), params: { author: {  } }
+  test 'should update author' do
+    patch author_url(@author), params: { author: { name: 'milward fillenary' } }
     assert_redirected_to author_url(@author)
   end
 
-  test "should destroy author" do
+  test 'should destroy author' do
     assert_difference('Author.count', -1) do
       delete author_url(@author)
     end
