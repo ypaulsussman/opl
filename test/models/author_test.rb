@@ -17,4 +17,11 @@ class AuthorTest < ActiveSupport::TestCase
     @author.save
     assert_not duplicate_author.valid?
   end
+
+  test 'on creation or update, changes sortable name' do
+    author = Author.create!(name: 'Foo Bar')
+    assert_equal 'bar foo', author.sortable_name
+    author.update!(name: 'BAZ QUUZ')
+    assert_equal 'quuz baz', author.sortable_name
+  end
 end

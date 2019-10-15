@@ -9,7 +9,6 @@ class Quote < ApplicationRecord
 
   private
 
-  # TODO: are the below _really_ better than just e.g. integrating the counter_culture gem?
   def set_orphan_author_for_deletion
     return unless persisted? && author_id_changed?
 

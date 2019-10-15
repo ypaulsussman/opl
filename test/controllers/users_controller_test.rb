@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
@@ -16,8 +18,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create user' do
-    assert_difference('User.count') do
-      post users_url, params: { user: { email: @user.email, name: @user.name } }
+    assert_difference('User.count', 1) do
+      post users_url, params: { user: { email: 'new_user@example.com', name: 'user mcnewton' } }
     end
     newest_user = User.order(created_at: :asc).last
     assert_redirected_to user_url(newest_user)
@@ -34,7 +36,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update user' do
-    patch user_url(@user), params: { user: { email: @user.email, name: @user.name } }
+    patch user_url(@user), params: { user: { email: 'new_email@example.com', name: 'Who Dis' } }
     assert_redirected_to user_url(@user)
   end
 

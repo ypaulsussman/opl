@@ -11,9 +11,7 @@ class QuotesController < ApplicationController
 
   # GET /quotes/{uuid}
   # GET /quotes/{uuid}.json
-  def show
-    puts "My params!: #{params}"
-  end
+  def show; end
 
   # GET /quotes/new
   def new
