@@ -1,7 +1,14 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class AuthorTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @author = authors(:one)
+  end
+
+  test 'validates name' do
+    @author.name = ' '
+    assert_not @author.valid?
+  end
 end
