@@ -7,8 +7,14 @@ class QuoteTest < ActiveSupport::TestCase
     @quote = quotes(:one)
   end
 
-  test 'validates name' do
+  test 'validates passage' do
     @quote.passage = ' '
     assert_not @quote.valid?
+  end
+
+  test 'ensures passage uniqueness' do
+    duplicate_quote = @quote.dup
+    @quote.save
+    assert_not duplicate_quote.valid?
   end
 end

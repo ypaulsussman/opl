@@ -2,7 +2,7 @@
 
 class Quote < ApplicationRecord
   belongs_to :author, counter_cache: true
-  validates :passage, presence: true
+  validates :passage, presence: true, uniqueness: true
   before_save :set_orphan_author_for_deletion
   after_save :remove_orphan_author
   after_destroy :remove_silent_authors

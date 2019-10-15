@@ -2,7 +2,7 @@
 
 class Author < ApplicationRecord
   has_many :quotes, dependent: :destroy
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   before_save :build_sortable_name
 
   def build_sortable_name

@@ -11,4 +11,10 @@ class AuthorTest < ActiveSupport::TestCase
     @author.name = ' '
     assert_not @author.valid?
   end
+
+  test 'ensures name uniqueness' do
+    duplicate_author = @author.dup
+    @author.save
+    assert_not duplicate_author.valid?
+  end
 end
