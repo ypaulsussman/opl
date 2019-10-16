@@ -11,5 +11,8 @@ class User < ApplicationRecord
     length: { maximum: 255 },
     format: { with: VALID_EMAIL_REGEX }
   )
+  validates :password, presence: true, length: { minimum: 6 }
   before_validation { email.downcase! }
+
+  has_secure_password
 end

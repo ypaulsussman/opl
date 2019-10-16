@@ -27,6 +27,16 @@ quotes.each do |row|
   puts "Added quote by #{author}..."
 end
 
-User.create!(name: 'readonly peasant', email: 'user@example.com')
+User.create!(
+  name: 'readonly peasant',
+  email: 'user@example.com',
+  password: 'foobar',
+  password_confirmation: 'foobar'
+)
 
-User.create!(name: 'capn quotes', email: 'admin@example.com')
+User.create!(
+  name: 'capn quotes',
+  email: 'admin@example.com',
+  password: 'bazquux',
+  password_confirmation: 'bazquux'
+)
