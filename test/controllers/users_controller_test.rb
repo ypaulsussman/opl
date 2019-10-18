@@ -47,7 +47,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update user' do
     patch(
-      user_url(@user), 
+      user_url(@user),
       params: {
         user: {
           name: 'Who Dis',
