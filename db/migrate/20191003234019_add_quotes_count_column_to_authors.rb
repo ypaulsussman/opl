@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddQuotesCountColumnToAuthors < ActiveRecord::Migration[6.0]
   def change
     add_column :authors, :quotes_count, :integer, null: false, default: 0
