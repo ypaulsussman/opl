@@ -2,6 +2,8 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_logged_in, only: [:edit, :update]
+  before_action :confirm_correct_user, only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -65,6 +67,20 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def confirm_logged_in
+    return if logged_in?
+
+    store_forwarding_url
+    flash[:danger] = 'Please log in.'
+    redirect_to login_path
+  end
+
+  def confirm_correct_user
+    return if current_user?(User.find(params[:id]))
+
+    redirect_to root_path
+  end
 
   def set_user
     @user = User.find(params[:id])

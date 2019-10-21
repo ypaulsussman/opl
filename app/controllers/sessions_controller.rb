@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     log_in(submitted_user, params[:session][:remember_me])
-    redirect_to submitted_user
+    redirect_back_or submitted_user
   end
 
   def destroy

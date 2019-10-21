@@ -38,7 +38,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       )
       follow_redirect!
       assert_template 'users/show'
-      assert_select '#notice', 'User was successfully created.'
+      assert_select '.flash-notice', text: 'User was successfully created.'
       assert currently_logged_in?
     end
   end
