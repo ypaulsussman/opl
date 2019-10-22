@@ -2,13 +2,14 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :confirm_logged_in, only: [:edit, :update]
+  before_action :confirm_logged_in, only: [:index, :edit, :update]
   before_action :confirm_correct_user, only: [:edit, :update]
+  before_action :confirm_admin, only: [:index, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.page(params[:page])
   end
 
   # GET /users/1
@@ -68,18 +69,24 @@ class UsersController < ApplicationController
 
   private
 
+  def confirm_admin
+    return if current_user.admin?
+
+    redirect_to root_path
+  end
+
+  def confirm_correct_user
+    return if current_user?(User.find(params[:id]))
+
+    confirm_admin
+  end
+
   def confirm_logged_in
     return if logged_in?
 
     store_forwarding_url
     flash[:danger] = 'Please log in.'
     redirect_to login_path
-  end
-
-  def confirm_correct_user
-    return if current_user?(User.find(params[:id]))
-
-    redirect_to root_path
   end
 
   def set_user

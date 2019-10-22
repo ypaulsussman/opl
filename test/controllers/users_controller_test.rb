@@ -17,9 +17,34 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     }
   end
 
-  test 'should get index' do
+  test 'should get index, if admin' do
+    @user.update_attribute(:admin, true)
+    @user.reload
+    log_in_as(@user)
     get users_url
     assert_response :success
+  end
+
+  test 'should reject user-index, if non-admin' do
+    log_in_as(@user)
+    get users_url
+    assert_redirected_to root_path
+  end
+
+  test 'should destroy user, if admin' do
+    @user.update_attribute(:admin, true)
+    @user.reload
+    log_in_as(@user)
+    assert_difference('User.count', -1) do
+      delete user_url(@stranger_danger)
+    end
+    assert_redirected_to users_url
+  end
+
+  test 'should reject user-destroy, if non-admin' do
+    log_in_as(@user)
+    assert_no_difference('Author.count') { delete user_url(@stranger_danger) }
+    assert_redirected_to root_path
   end
 
   test 'should get new' do
@@ -76,11 +101,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test 'should destroy user' do
-    assert_difference('User.count', -1) do
-      delete user_url(@user)
-    end
-
-    assert_redirected_to users_url
+  test 'should reject changes to admin attribute' do
+    log_in_as(@user)
+    assert_not @user.admin?
+    patch(user_url(@user), params: { user: @user_changes_boilerplate.merge!(admin: true) })
+    assert_not @user.reload.admin?
   end
 end

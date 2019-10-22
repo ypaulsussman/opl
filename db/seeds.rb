@@ -38,5 +38,6 @@ User.create!(
   name: 'capn quotes',
   email: 'admin@example.com',
   password: 'bazquux',
-  password_confirmation: 'bazquux'
+  password_confirmation: 'bazquux',
+  admin: true
 )
