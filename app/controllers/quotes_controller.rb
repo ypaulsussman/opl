@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class QuotesController < ApplicationController
+  include UsersHelper
+  before_action :confirm_admin, except: [:index, :show]
   before_action :set_quote, only: [:show, :edit, :update, :destroy]
 
   # GET /quotes

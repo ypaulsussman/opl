@@ -16,7 +16,9 @@
       <tr>
         <td><%= author.name%> - <%= pluralize(author.quotes_count, 'quote')%></td>
         <td><%= link_to 'Show All Quotes', author %></td>
-        <td><%= link_to 'Edit Author', edit_author_path(author) %></td>
+        <% if current_user&.admin? %>
+          <td><%= link_to 'Edit Author', edit_author_path(author) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

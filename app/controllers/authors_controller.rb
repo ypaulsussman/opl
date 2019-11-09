@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AuthorsController < ApplicationController
+  include UsersHelper
+  before_action :confirm_admin, except: [:index, :show]
   before_action :set_author, only: [:show, :edit, :update, :destroy]
 
   # GET /authors

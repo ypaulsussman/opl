@@ -10,12 +10,15 @@
     <% @author.quotes.each do |quote| %>
       <tr>
         <td>"<em><%= quote.passage%></em>"</td>
-        <td><%= link_to 'Edit Quote', edit_quote_path(quote) %></td>
+        <% if current_user&.admin? %>
+          <td><%= link_to 'Edit Quote', edit_quote_path(quote) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-
-<%= link_to 'Edit Author', edit_author_path(@author) %> |
+<% if current_user&.admin? %>
+  <%= link_to 'Edit Author', edit_author_path(@author) %> |
+<% end %>
 <%= link_to 'Back', url_options=:back %>

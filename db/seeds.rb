@@ -33,11 +33,3 @@ User.create!(
   password: 'foobar',
   password_confirmation: 'foobar'
 )
-
-User.create!(
-  name: 'capn quotes',
-  email: 'admin@example.com',
-  password: 'bazquux',
-  password_confirmation: 'bazquux',
-  admin: true
-)

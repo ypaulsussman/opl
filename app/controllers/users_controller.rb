@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  include UsersHelper
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in, only: [:index, :edit, :update]
   before_action :confirm_correct_user, only: [:edit, :update]
@@ -68,12 +69,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def confirm_admin
-    return if current_user.admin?
-
-    redirect_to root_path
-  end
 
   def confirm_correct_user
     return if current_user?(User.find(params[:id]))
