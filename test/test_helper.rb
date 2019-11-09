@@ -19,6 +19,14 @@ module ActiveSupport
     def log_in_as(user)
       session[:user_id] = user.id
     end
+
+    def add_users
+      @user_uno = users(:one)
+      @user_dos = users(:two)
+      [@user_uno, @user_dos].each do |u|
+        u.update!(password: 'foobar', password_confirmation: 'foobar')
+      end
+    end
   end
 end
 
