@@ -1,5 +1,7 @@
 <h1>Quotes</h1>
-<%= link_to 'New Quote', new_quote_path %>
+<% if current_user&.admin? %>
+  <%= link_to 'New Quote', new_quote_path %>
+<% end %>
 <span><%= link_to 'See All Authors', authors_path %></span>
 <%= paginate @quotes, window: 1, outer_window: 3 %>
 

@@ -1,43 +1,65 @@
 # frozen_string_literal: true
 
-require "application_system_test_case"
+require 'application_system_test_case'
 
 class QuotesTest < ApplicationSystemTestCase
   setup do
-    @quote = quotes(:one)
+    create_initial_users
   end
 
-  test "visiting the index" do
-    visit quotes_url
-    assert_selector "h1", text: "Quotes"
+  test 'visiting the index' do
+    visit root_url
+    assert_selector 'h1', text: 'Quotes'
+    assert page.has_content?('this is a very, very real quote')
+    assert page.has_content?('this quotation is also exceptionally real')
   end
 
-  test "creating a Quote" do
-    visit quotes_url
-    click_on "New Quote"
+  test 'creating a Quote' do
+    log_in_as(@non_admin)
+    visit root_url
+    assert_no_link 'New Quote'
+    click_link 'Log Out'
+    log_in_as(@admin)
+    visit root_url
+    click_link 'New Quote'
 
-    click_on "Create Quote"
+    fill_in 'quote_passage', with: 'yo peep my new quote!'
+    select 'Johannes Notrealerton', from: 'quote_author_id'
+    click_on 'Create Quote'
 
-    assert_text "Quote was successfully created"
-    click_on "Back"
+    assert_text 'Quote was successfully created'
+    assert page.has_content?('"yo peep my new quote!" - Johannes Notrealerton')
   end
 
-  test "updating a Quote" do
-    visit quotes_url
-    click_on "Edit", match: :first
+  test 'updating a Quote' do
+    log_in_as(@non_admin)
+    visit root_url
+    assert_no_link 'Edit'
+    click_link 'Log Out'
+    log_in_as(@admin)
+    visit root_url
+    # TODO: below click relies on alphabetical sorting of quotes
+    # to ensure testing of both passage and author are updated;
+    # replace with selector-matching when you add styles/classes/ids
+    click_on 'Edit', match: :first
 
-    click_on "Update Quote"
+    fill_in 'quote_passage', with: 'wow look at this fresh quote'
+    select 'Michaela Equallefake', from: 'quote_author_id'
+    click_on 'Update Quote'
 
-    assert_text "Quote was successfully updated"
-    click_on "Back"
+    assert_text 'Quote was successfully updated'
+    assert page.has_content?('"wow look at this fresh quote" - Michaela Equallefake')
   end
 
-  test "destroying a Quote" do
-    visit quotes_url
+  test 'destroying a Quote' do
+    log_in_as(@admin)
+    visit root_url
+    click_on 'Edit', match: :first
+
     page.accept_confirm do
-      click_on "Destroy", match: :first
+      click_link 'Remove Quote', match: :first
     end
 
-    assert_text "Quote was successfully destroyed"
+    assert_text 'Quote was successfully destroyed'
   end
 end

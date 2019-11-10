@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: "faker macrando"
+  name: "readonly mctestpeasant"
   email: "baz@quuz.com"
 
 two:
-  name: "nuone testerino"
+  name: "capn mctestquotes"
   email: "foo@bar.com"
