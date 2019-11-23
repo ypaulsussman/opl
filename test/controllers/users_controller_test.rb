@@ -52,8 +52,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference('User.count', 1) do
       post(users_path, params: { user: @user_changes_boilerplate })
     end
-    newest_user = User.order(created_at: :asc).last
-    assert_redirected_to user_url(newest_user)
+    assert_redirected_to root_path
   end
 
   test 'should show user' do

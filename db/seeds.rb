@@ -31,5 +31,7 @@ User.create!(
   name: 'readonly peasant',
   email: 'user@example.com',
   password: 'foobar',
-  password_confirmation: 'foobar'
+  password_confirmation: 'foobar',
+  activated: true,
+  activated_at: Time.zone.now
 )

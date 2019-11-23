@@ -29,9 +29,9 @@ class UsersTest < ApplicationSystemTestCase
     fill_in 'Confirmation', with: 'foobar'
     click_button 'Create User'
 
-    assert_text 'User was successfully created'
-    assert page.has_content?('newuser mcuserton')
-    assert page.has_content?('new_user@example.com')
+    assert_text 'Excellent! Please check your email to activate your account.'
+    assert page.has_content?('this is a very, very real quote')
+    assert page.has_content?('Johannes Notrealerton')
   end
 
   test 'updating a User' do

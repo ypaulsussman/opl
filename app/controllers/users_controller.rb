@@ -7,15 +7,14 @@ class UsersController < ApplicationController
   before_action :confirm_admin, only: [:index, :destroy]
 
   # GET /users
-  # GET /users.json
   def index
-    @users = User.all.page(params[:page])
+    @users = User.where(activated: true).page(params[:page])
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    redirect_to root_url unless @user.activated?
   end
 
   # GET /users/new
@@ -27,19 +26,14 @@ class UsersController < ApplicationController
   def edit; end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        log_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      @user.send_activation_email
+      flash[:info] = 'Excellent! Please check your email to activate your account.'
+      redirect_to root_url
+    else
+      render :new
     end
   end
 

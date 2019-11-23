@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  attr_accessor :remember_me_token
-
   VALID_EMAIL_REGEX =
     /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
+  attr_accessor :remember_me_token, :activation_token
+
+  before_validation { email.downcase! }
+  before_create :create_activation_digest
+
   validates :name, presence: true, length: { maximum: 255 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validates(
     :email,
     presence: true,
@@ -13,8 +17,6 @@ class User < ApplicationRecord
     length: { maximum: 255 },
     format: { with: VALID_EMAIL_REGEX }
   )
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  before_validation { email.downcase! }
 
   has_secure_password
 
@@ -27,10 +29,15 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
-  def authenticated?(remember_me_token)
-    return false if remember_me_digest.nil?
+  def activate_account
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
 
-    BCrypt::Password.new(remember_me_digest).is_password?(remember_me_token)
+  def authenticated?(attr, token)
+    digest = send("#{attr}_digest")
+    return false if digest.nil?
+
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   def forget_me
@@ -40,5 +47,16 @@ class User < ApplicationRecord
   def remember_me
     self.remember_me_token = User.new_token
     update_attribute(:remember_me_digest, User.digest(remember_me_token))
+  end
+
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  private
+
+  def create_activation_digest
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
   end
 end

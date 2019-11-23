@@ -3,7 +3,11 @@
 one:
   name: "readonly mctestpeasant"
   email: "baz@quuz.com"
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 two:
   name: "capn mctestquotes"
   email: "foo@bar.com"
+  activated: true
+  activated_at: <%= Time.zone.now %>
