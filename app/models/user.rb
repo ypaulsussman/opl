@@ -52,6 +52,10 @@ class User < ApplicationRecord
     update_attribute(:remember_me_digest, nil)
   end
 
+  def password_reset_expired?
+    password_reset_sent_at < 2.hours.ago
+  end
+
   def remember_me
     self.remember_me_token = User.new_token
     update_attribute(:remember_me_digest, User.digest(remember_me_token))

@@ -25,7 +25,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select '.field_with_errors', 8
     assert_select '#error_explanation > h2', text: '4 errors prohibited this user from being saved:'
   end
-
+  
+  # rubocop:disable Metrics/BlockLength
   test 'valid signup information, with account activation' do
     get signup_path
     assert_difference 'User.count', 1 do
@@ -60,4 +61,5 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_template 'users/show'
     assert currently_logged_in?
   end
+  # rubocop:enable Metrics/BlockLength
 end
