@@ -20,6 +20,7 @@ class UsersTest < ApplicationSystemTestCase
   end
 
   test 'creating a User' do
+    ActionMailer::Base.deliveries.clear
     visit root_url
     click_link 'Sign Up'
 
@@ -27,11 +28,39 @@ class UsersTest < ApplicationSystemTestCase
     fill_in 'Email', with: 'new_user@example.com'
     fill_in 'Password', with: 'foobar'
     fill_in 'Confirmation', with: 'foobar'
-    click_button 'Create User'
-
+    assert_emails 1 do
+      click_button 'Create User'
+    end
     assert_text 'Excellent! Please check your email to activate your account.'
-    assert page.has_content?('this is a very, very real quote')
-    assert page.has_content?('Johannes Notrealerton')
+
+    new_user = User.find_by(email: 'new_user@example.com')
+    log_in_as(new_user)
+    assert_text 'Account not activated. Check your email for the activation link.'
+
+    path_from_email_link =
+      ActionMailer::Base.deliveries.first.text_part.body.to_s[%r{/account(.*)}]
+    visit path_from_email_link
+    assert_text 'Account activated -- welcome!'
+  end
+
+  test 'recovering a user password' do
+    ActionMailer::Base.deliveries.clear
+    visit root_url
+    click_link 'Log In'
+    click_link '(forgot password)'
+    fill_in 'Email', with: 'baz@quuz.com'
+    assert_emails 1 do
+      click_button 'Submit'
+    end
+
+    path_from_email_link =
+      ActionMailer::Base.deliveries.first.text_part.body.to_s[%r{/password(.*)}]
+    visit path_from_email_link
+    fill_in 'Password', with: 'passwordeux'
+    fill_in 'Confirmation', with: 'passwordeux'
+    click_button 'Update Password'
+
+    assert_text 'Password has been reset.'
   end
 
   test 'updating a User' do
