@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX =
     /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
-  attr_accessor :remember_me_token, :activation_token
+  attr_accessor :remember_me_token, :activation_token, :password_reset_token
 
   before_validation { email.downcase! }
   before_create :create_activation_digest
@@ -40,6 +40,14 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
+  def create_password_reset_digest
+    self.password_reset_token = User.new_token
+    update_columns(
+      password_reset_digest: User.digest(password_reset_token),
+      password_reset_sent_at: Time.zone.now
+    )
+  end
+
   def forget_me
     update_attribute(:remember_me_digest, nil)
   end
@@ -51,6 +59,10 @@ class User < ApplicationRecord
 
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
   end
 
   private
