@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Author < ApplicationRecord
+  self.implicit_order_column = 'sortable_name'
   has_many :quotes, dependent: :destroy
   validates :name, presence: true, uniqueness: true
   before_save :build_sortable_name

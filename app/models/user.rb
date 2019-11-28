@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX =
     /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
+
+  self.implicit_order_column = 'email'
   attr_accessor :remember_me_token, :activation_token, :password_reset_token
 
   before_validation { email.downcase! }
