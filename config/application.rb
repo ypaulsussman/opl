@@ -19,6 +19,9 @@ module Opl
     # the framework and any gems in your application.
     config.active_record.primary_key = :uuid
 
+    # Allow signup view/controller actions in dev/test
+    config.allow_signups = true
+
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
       g.orm :active_record, foreign_key_type: :uuid

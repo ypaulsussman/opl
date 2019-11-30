@@ -6,6 +6,10 @@ class UsersController < ApplicationController
   before_action :confirm_correct_user, only: [:edit, :update]
   before_action :confirm_admin, only: [:index, :destroy]
 
+  NO_SIGNUP_MESSAGE =
+    'Sorry! I\'m trying to keep my SendGrid subscription at ' \
+    'the free tier, so account signup is currently disabled.'
+
   # GET /users
   def index
     @users = User.where(activated: true).page(params[:page])
@@ -19,6 +23,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    disallow_signup && return unless Rails.configuration.allow_signups
     @user = User.new
   end
 
@@ -27,6 +32,8 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
+    disallow_signup && return unless Rails.configuration.allow_signups
+
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
@@ -75,6 +82,11 @@ class UsersController < ApplicationController
     store_forwarding_url
     flash[:danger] = 'Please log in.'
     redirect_to login_path
+  end
+
+  def disallow_signup
+    flash[:info] = NO_SIGNUP_MESSAGE
+    redirect_to root_url
   end
 
   def set_user

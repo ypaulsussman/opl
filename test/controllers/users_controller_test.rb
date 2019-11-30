@@ -48,11 +48,27 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should redirect new when signup is turned off' do
+    Rails.configuration.allow_signups = false
+    get signup_path
+    assert_redirected_to root_path
+    Rails.configuration.allow_signups = true
+  end
+
   test 'should create user' do
     assert_difference('User.count', 1) do
       post(users_path, params: { user: @user_changes_boilerplate })
     end
     assert_redirected_to root_path
+  end
+
+  test 'should redirect create-user when signup is turned off' do
+    Rails.configuration.allow_signups = false
+    assert_no_difference('User.count') do
+      post(users_path, params: { user: @user_changes_boilerplate })
+    end
+    assert_redirected_to root_path
+    Rails.configuration.allow_signups = true
   end
 
   test 'should show user' do

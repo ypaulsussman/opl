@@ -80,6 +80,9 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
+  # Don't let anyone else join the site, currently, to avoid going over SendGrid's free-tier limit.
+  config.allow_signups = false
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
