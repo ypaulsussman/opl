@@ -26,8 +26,8 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.quote_of_the_day.subject
   #
-  def quote_of_the_day(user)
-    @user = user
+  def quote_of_the_day(user, quote)
+    @quote = quote
     mail to: user.email, subject: "OPLquote for #{Date.today.to_formatted_s(:long_ordinal)}"
   end
 end

@@ -27,12 +27,15 @@ class UserMailerTest < ActionMailer::TestCase
   end
 
   test 'quote_of_the_day' do
-    user = users(:one)
-    mail = UserMailer.quote_of_the_day(user)
     day_of_week = Time.new.strftime('%A')
+    user = users(:one)
+    quote = quotes(:one)
+    mail = UserMailer.quote_of_the_day(user, quote)
     assert_equal "OPLquote for #{Date.today.to_formatted_s(:long_ordinal)}", mail.subject
     assert_equal [user.email], mail.to
     assert_equal ['noreply@example.com'], mail.from
     assert_match "What up it's #{day_of_week}!!", mail.body.encoded
+    assert_match quote.passage, mail.body.encoded
+    assert_match quote.author.name, mail.body.encoded
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_01_174445) do
+ActiveRecord::Schema.define(version: 2019_12_01_212340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 2019_12_01_174445) do
     t.uuid "author_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "next_send_at"
+    t.datetime "most_recently_sent_at"
     t.index ["author_id"], name: "index_quotes_on_author_id"
   end
 

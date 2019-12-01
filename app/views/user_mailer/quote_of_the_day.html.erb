@@ -1,9 +1,5 @@
 <h1>What up it's <%= Time.new.strftime('%A') %>!!</h1>
 
-<p>So-and-so once said: </p>
-
-<p>"<em>foo and bar and baz.</em>"</p>
-
-<p>Go get it.</p>
+<p>"<em><%= @quote.passage %></em>" - <%= @quote.author.name %></p>
 
 <%# Day's wasting, and it's later than you think. %>
