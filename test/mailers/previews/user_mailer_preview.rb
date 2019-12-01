@@ -15,4 +15,10 @@ class UserMailerPreview < ActionMailer::Preview
     user.password_reset_token = User.new_token
     UserMailer.password_reset(user)
   end
+
+  # Preview this email at http://localhost:3000/rails/mailers/user_mailer/quote_of_the_day
+  def quote_of_the_day
+    user = User.first
+    UserMailer.quote_of_the_day(user)
+  end
 end

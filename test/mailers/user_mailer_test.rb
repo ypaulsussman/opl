@@ -25,4 +25,14 @@ class UserMailerTest < ActionMailer::TestCase
     assert_match user.password_reset_token, mail.body.encoded
     assert_match CGI.escape(user.email), mail.body.encoded
   end
+
+  test 'quote_of_the_day' do
+    user = users(:one)
+    mail = UserMailer.quote_of_the_day(user)
+    day_of_week = Time.new.strftime('%A')
+    assert_equal "OPLquote for #{Date.today.to_formatted_s(:long_ordinal)}", mail.subject
+    assert_equal [user.email], mail.to
+    assert_equal ['noreply@example.com'], mail.from
+    assert_match "What up it's #{day_of_week}!!", mail.body.encoded
+  end
 end
