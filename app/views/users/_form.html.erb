@@ -31,6 +31,13 @@
     <%= form.password_field :password_confirmation %>
   </div>
 
+  <div>
+    <%= form.label :receive_qotd do %> 
+      <%= form.check_box :receive_qotd %>
+      <span>I'd like to receive a randomly-selected quote by daily email.</span>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

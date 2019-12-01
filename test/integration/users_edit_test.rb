@@ -41,7 +41,8 @@ class UsersEditTest < ActionDispatch::IntegrationTest
           email: new_email,
           name: new_name,
           password: 'foobar',
-          password_confirmation: 'foobar'
+          password_confirmation: 'foobar',
+          receive_qotd: true
         }
       }
     )
@@ -51,5 +52,6 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     @user.reload
     assert_equal @user.name, new_name
     assert_equal @user.email, new_email
+    assert_equal @user.receive_qotd, true
   end
 end
