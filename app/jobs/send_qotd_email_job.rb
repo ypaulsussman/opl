@@ -13,6 +13,7 @@ class SendQotdEmailJob < ApplicationJob
     end
 
     quote.update_columns(
+      times_sent: (quote.times_sent += 1),
       most_recently_sent_at: quote.next_send_at,
       next_send_at: nil
     )
