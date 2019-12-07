@@ -6,9 +6,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.0'
 # Use postgres as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -19,16 +19,17 @@ gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-
-# Paginate quotes
-gem 'kaminari'
-
+# Provide pagination
+gem 'kaminari', '~> 1.1'
+# Provide queueing for async jobs
+gem 'delayed_job_active_record', '~> 4.1'
+# Use Active Model has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+# Role models are important
 gem 'rubocop'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
