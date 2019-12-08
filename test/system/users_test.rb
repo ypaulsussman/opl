@@ -48,7 +48,7 @@ class UsersTest < ApplicationSystemTestCase
     visit root_url
     click_link 'Log In'
     click_link '(forgot password)'
-    fill_in 'Email', with: 'baz@quuz.com'
+    fill_in 'Email', with: 'foo@bar.com'
     assert_emails 1 do
       click_button 'Submit'
     end

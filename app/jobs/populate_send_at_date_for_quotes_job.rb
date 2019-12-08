@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
+# This job (and the identically-named rake task) was created before
+# the `Quote#add_next_send_at` callback; that method supercedes this file.
+
+# (I wanted the original ~1k quotes sent to me randomly, rather than in the sequence
+# they appear in the .csv; this job accomplishes that, but I doubt its value to other users.)
+
+# If you, too, want your quotes mailed out in an effectively-random sequence, comment out
+# `before_create :add_next_send_at` in `quote.rb` before running the initial `rake db:seed`,
+# then run `$ rake populate_send_at_date_for_quotes` immediately after.
+
 class PopulateSendAtDateForQuotesJob < ApplicationJob
   queue_as :default
 
