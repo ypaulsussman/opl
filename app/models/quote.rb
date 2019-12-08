@@ -3,17 +3,27 @@
 class Quote < ApplicationRecord
   belongs_to :author, counter_cache: true
   validates :passage, presence: true, uniqueness: true
+  before_create :add_next_send_at
   before_save :set_orphan_author_for_deletion
   after_save :remove_orphan_author
   after_destroy :remove_silent_authors
 
   private
 
-  def set_orphan_author_for_deletion
-    return unless persisted? && author_id_changed?
+  def add_next_send_at
+    return if next_send_at.present?
 
-    prior_author = Author.find(author_id_was)
-    @orphan_author = prior_author unless prior_author.quotes_count > 1
+    furthest_send_at_date =
+      Quote
+      .where.not(next_send_at: nil)
+      .order(:next_send_at)
+      .pluck(:next_send_at).last
+
+    self.next_send_at = if furthest_send_at_date.present?
+                          furthest_send_at_date + 1.day
+                        else
+                          Date.tomorrow
+                        end
   end
 
   def remove_orphan_author
@@ -22,5 +32,12 @@ class Quote < ApplicationRecord
 
   def remove_silent_authors
     author.destroy unless author.quotes_count.positive?
+  end
+
+  def set_orphan_author_for_deletion
+    return unless persisted? && author_id_changed?
+
+    prior_author = Author.find(author_id_was)
+    @orphan_author = prior_author unless prior_author.quotes_count > 1
   end
 end

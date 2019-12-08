@@ -20,10 +20,27 @@ class QuoteTest < ActiveSupport::TestCase
     end
   end
 
+  class QuoteCreateTest < QuoteTest
+    setup do
+      @author = authors(:one)
+    end
+
+    test 'on quote creation, adds tomorrow as send-at date when no other quotes are present' do
+      @new_quote = Quote.create!(passage: 'bar', author: @author)
+      assert_equal @new_quote.next_send_at, Date.tomorrow
+    end
+
+    test 'on quote creation, adds closest empty send-at date when other quotes are present' do
+      Quote.create!(passage: 'foo', author: @author, next_send_at: Date.tomorrow)
+      @new_quote = Quote.create!(passage: 'bar', author: @author)
+      assert_equal @new_quote.next_send_at, (Date.tomorrow + 1.day)
+    end
+  end
+
   class QuoteUpdateTest < QuoteTest
     setup do
       @old_author = authors(:one)
-      @quote_one = Quote.create!(passage: 'foo', author: @old_author)
+      @quote_one = Quote.create!(passage: 'foo', author: @old_author, next_send_at: Date.today)
       @new_author = authors(:two)
     end
 
@@ -42,7 +59,7 @@ class QuoteTest < ActiveSupport::TestCase
   class QuoteDeletionTest < QuoteTest
     setup do
       @quote_author = authors(:one)
-      @quote_one = Quote.create!(passage: 'foo', author: @quote_author)
+      @quote_one = Quote.create!(passage: 'foo', author: @quote_author, next_send_at: Date.today)
     end
 
     test 'on quote deletion, deletes orphan authors' do
