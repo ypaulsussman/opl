@@ -19,7 +19,7 @@ class UserMailerTest < ActionMailer::TestCase
     user = users(:one)
     user.password_reset_token = User.new_token
     mail = UserMailer.password_reset(user)
-    assert_equal 'Password reset', mail.subject
+    assert_equal 'OPL Password Reset', mail.subject
     assert_equal [user.email], mail.to
     assert_equal ['noreply@example.com'], mail.from
     assert_match user.password_reset_token, mail.body.encoded
@@ -31,7 +31,7 @@ class UserMailerTest < ActionMailer::TestCase
     user = users(:one)
     quote = quotes(:one)
     mail = UserMailer.quote_of_the_day(user, quote)
-    assert_equal "OPLquote for #{Date.today.to_formatted_s(:long_ordinal)}", mail.subject
+    assert_equal "OPL for #{Date.today.to_formatted_s(:long_ordinal)}", mail.subject
     assert_equal [user.email], mail.to
     assert_equal ['noreply@example.com'], mail.from
     assert_match "What up it's #{day_of_week}!!", mail.body.encoded
