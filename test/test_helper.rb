@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
-ENV['ARBITRARY_NEWQUOTE_BACKLOG_SIZE'] ||= '1'
 require_relative '../config/environment'
 require 'rails/test_help'
 

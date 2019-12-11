@@ -3,20 +3,36 @@
 require 'test_helper'
 
 class PopulateSendAtDateForQuotesJobTest < ActiveJob::TestCase
-  # setup do
-  #   @author = authors(:one)
-  #   @quote = Quote.create!(passage: 'foo', author: @author)
-  # end
+  self.use_transactional_tests = true
 
-  # test 'on quote creation, adds tomorrow as send-at date when no other quotes are present' do
-  #   assert_nil @quote.next_send_at
-  #   PopulateSendAtDateForQuotesJob.perform_now
-  #   assert_equal @quote.next_send_at, Date.tomorrow
-  # end
+  setup do
+    @quote_uno = quotes(:one)
+    @quote_dos = quotes(:two)
+    @author = authors(:one)
+  end
 
-  # test 'on quote creation, adds closest empty send-at date when other quotes are present' do
-  #   Quote.create!(passage: 'foo', author: @author, next_send_at: Date.tomorrow)
-  #   @new_quote = Quote.create!(passage: 'bar', author: @author)
-  #   assert_equal @new_quote.next_send_at, (Date.tomorrow + 1.day)
-  # end
+  test 'does nothing if new quotes are fewer than bucket size' do
+    @new_quote = Quote.create!(passage: 'foo', author: @author)
+    assert_nil @new_quote.next_send_at
+    PopulateSendAtDateForQuotesJob.perform_now(2)
+    assert_nil @new_quote.next_send_at
+  end
+
+  test 'adds tomorrow as send-at date when no other quotes are present' do
+    Quote.destroy_all
+    @new_quote = Quote.create!(passage: 'foo', author: @author)
+    assert_nil @new_quote.next_send_at
+    PopulateSendAtDateForQuotesJob.perform_now(1)
+    assert_equal Time.zone.tomorrow.midnight, @new_quote.reload.next_send_at
+  end
+
+  test 'adds closest empty send-at date when other quotes are present' do
+    @quote_uno.update!(next_send_at: Date.tomorrow)
+    @quote_dos.update!(next_send_at: Date.tomorrow + 1.day)
+    @new_quote = Quote.create!(passage: 'foo', author: @author)
+
+    assert_nil @new_quote.next_send_at
+    PopulateSendAtDateForQuotesJob.perform_now(1)
+    assert_equal (Time.zone.tomorrow + 2.days).midnight, @new_quote.reload.next_send_at
+  end
 end
