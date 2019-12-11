@@ -13,7 +13,10 @@ class SendQotdEmailJobTest < ActiveJob::TestCase
   end
 
   test 'does nothing if no quote is available for today' do
-    assert true
+    @our_qotd.update!(next_send_at: Date.tomorrow)
+    SendQotdEmailJob.perform_now
+
+    assert_equal 0, ActionMailer::Base.deliveries.count
   end
 
   test "sends today's quote solely to subscribed users" do
