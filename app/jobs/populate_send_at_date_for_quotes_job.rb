@@ -2,14 +2,20 @@
 
 class PopulateSendAtDateForQuotesJob < ApplicationJob
   queue_as :default
-  QUOTE_THRESHOLD = ENV.fetch('ARBITRARY_NEWQUOTE_BACKLOG_SIZE') { 50 }.to_i
+  QUOTE_THRESHOLD = ENV.fetch('NEW_QUOTE_BUCKET_SIZE') { 10 }.to_i
 
   def perform
     return if Quote.where(next_send_at: nil, times_sent: 0).count < QUOTE_THRESHOLD
 
-    # If no quotes have send-at dates, start with tomorrow; otherwise
-    # start with the day after (the furthest future date which is assigned an email)
-    base_date = Quote.order(:next_send_at).pluck(:next_send_at).first
+    # If no quotes have send-at dates, start with tomorrow; otherwise start with
+    # the day after (the furthest future date on which an email will send)
+    base_date =
+      Quote
+      .where.not(next_send_at: nil)
+      .order(:next_send_at)
+      .pluck(:next_send_at)
+      .last
+
     if base_date.nil?
       base_date = Date.tomorrow
     else
