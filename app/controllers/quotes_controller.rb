@@ -15,12 +15,11 @@ class QuotesController < ApplicationController
   # GET /quotes/new
   def new
     @quote = Quote.new
+    @author_id = params[:author_id]
   end
 
   # GET /quotes/{uuid}/edit
-  def edit
-    @all_authors = Author.order(:sortable_name)
-  end
+  def edit; end
 
   # POST /quotes
   def create
@@ -51,7 +50,7 @@ class QuotesController < ApplicationController
   private
 
   def set_quote
-    @quote = Quote.find(params[:id])
+    @quote = Quote.includes(:author).find(params[:id])
   end
 
   def quote_params

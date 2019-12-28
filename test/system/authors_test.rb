@@ -23,7 +23,7 @@ class AuthorsTest < ApplicationSystemTestCase
     click_on 'Create Author'
 
     assert_text 'Author was successfully created'
-    assert_selector 'h1', text: 'awesome wit'
+    assert_selector 'h1', text: 'New Quote'
   end
 
   test 'updating an Author' do

@@ -19,7 +19,8 @@
         :author_id, 
         Author.order(:sortable_name), 
         :id, 
-        :name
+        :name,
+        { selected: author_id }
       )%>
     </div>
     <%= form.submit %>

@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class AuthorsController < ApplicationController
+  AUTHOR_CREATED_MESSAGE = 'Author was successfully created. Let\'s give them a quote!'
+
   before_action :confirm_admin, except: [:index, :show]
   before_action :set_author, only: [:show, :edit, :update, :destroy]
 
   # GET /authors
-  # GET /authors.json
   def index
     @authors =
       Author
@@ -14,7 +15,6 @@ class AuthorsController < ApplicationController
   end
 
   # GET /authors/{uuid}
-  # GET /authors/{uuid}.json
   def show; end
 
   # GET /authors/new
@@ -26,43 +26,29 @@ class AuthorsController < ApplicationController
   def edit; end
 
   # POST /authors
-  # POST /authors.json
   def create
     @author = Author.new(author_params)
 
-    respond_to do |format|
-      if @author.save
-        format.html { redirect_to @author, notice: 'Author was successfully created.' }
-        format.json { render :show, status: :created, location: @author }
-      else
-        format.html { render :new }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
-      end
+    if @author.save
+      redirect_to new_quote_path(author_id: @author.id), notice: AUTHOR_CREATED_MESSAGE
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /authors/{uuid}
-  # PATCH/PUT /authors/{uuid}.json
   def update
-    respond_to do |format|
-      if @author.update(author_params)
-        format.html { redirect_to @author, notice: 'Author was successfully updated.' }
-        format.json { render :show, status: :ok, location: @author }
-      else
-        format.html { render :edit }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
-      end
+    if @author.update(author_params)
+      redirect_to @author, notice: 'Author was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /authors/{uuid}
-  # DELETE /authors/{uuid}.json
   def destroy
     @author.destroy!
-    respond_to do |format|
-      format.html { redirect_to authors_url, notice: 'Author was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to authors_url, notice: 'Author was successfully destroyed.'
   end
 
   private

@@ -1,6 +1,6 @@
 <h1>Editing Quote</h1>
 
-<%= render 'form', quote: @quote %>
+<%= render 'form', quote: @quote, author_id: @quote.author.id %>
 
 <%= link_to 'Remove Quote', @quote, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Back', url_options=:back %>

@@ -32,7 +32,7 @@ class AuthorsControllerTest < ActionDispatch::IntegrationTest
       post authors_url, params: { author: { name: 'filward millenary' } }
     end
     newest_author = Author.order(created_at: :asc).last
-    assert_redirected_to author_url(newest_author)
+    assert_redirected_to new_quote_path(author_id: newest_author.id)
   end
 
   test 'should get edit for admin' do
