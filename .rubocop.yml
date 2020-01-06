@@ -7,14 +7,14 @@ AllCops:
     - "tmp/**/*"
   TargetRubyVersion: 2.6
 
+Layout/LineLength:
+  Max: 100
+
 Metrics/AbcSize:
   Enabled: false
 
 Metrics/ClassLength:
   Max: 250
-
-Metrics/LineLength:
-  Max: 100
 
 Metrics/MethodLength:
   Max: 50
