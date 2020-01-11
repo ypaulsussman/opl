@@ -20,8 +20,8 @@ class AuthorTest < ActiveSupport::TestCase
 
   test 'on creation or update, changes sortable name' do
     author = Author.create!(name: 'Foo Bar')
-    assert_equal 'bar foo', author.sortable_name
+    assert_equal 'bar-foo', author.slug
     author.update!(name: 'BAZ QUUZ')
-    assert_equal 'quuz baz', author.sortable_name
+    assert_equal 'quuz-baz', author.slug
   end
 end

@@ -2,8 +2,8 @@
 
 one:
   name: "Johannes Notrealerton"
-  sortable_name: "notrealerton johannes"
+  slug: "notrealerton-johannes"
 
 two:
   name: "Michaela Equallefake"
-  sortable_name: "equallefake michaela"
+  slug: "equallefake-michaela"

@@ -44,7 +44,7 @@ class AuthorsControllerTest < ActionDispatch::IntegrationTest
   test 'should update author for admin' do
     log_in_as(@user_dos)
     patch author_url(@author), params: { author: { name: 'milward fillenary' } }
-    assert_redirected_to author_url(@author)
+    assert_redirected_to author_url(@author.reload)
   end
 
   test 'should destroy author for admin' do

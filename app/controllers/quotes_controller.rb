@@ -6,7 +6,7 @@ class QuotesController < ApplicationController
 
   # GET /quotes
   def index
-    @quotes = Quote.joins(:author).order(:sortable_name).page(params[:page])
+    @quotes = Quote.joins(:author).order(:slug).page(params[:page])
   end
 
   # GET /quotes/{uuid}

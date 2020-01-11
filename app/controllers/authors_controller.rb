@@ -8,9 +8,12 @@ class AuthorsController < ApplicationController
 
   # GET /authors
   def index
+    # @Y: use for sort toggle
+    # by_name = 'slug ASC, quotes_count DESC'
+    by_quotes_count = 'quotes_count DESC, slug ASC'
     @authors =
       Author
-      .order(quotes_count: :desc, sortable_name: :asc)
+      .order(by_quotes_count)
       .page(params[:page])
   end
 
@@ -54,7 +57,7 @@ class AuthorsController < ApplicationController
   private
 
   def set_author
-    @author = Author.find(params[:id])
+    @author = Author.find_by(slug: params[:slug])
   end
 
   def author_params
