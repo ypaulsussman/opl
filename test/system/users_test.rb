@@ -68,13 +68,20 @@ class UsersTest < ApplicationSystemTestCase
     visit users_url
     click_link 'Settings'
 
+    fill_in 'Personal URL path', with: @admin.slug
+    click_on 'Update User'
+
+    assert_text 'Slug has already been taken'
+
     fill_in 'Email', with: 'new_email@example.com'
     fill_in 'Name', with: 'myrad newname'
+    fill_in 'Personal URL path', with: 'wow-cool-slug'
     click_on 'Update User'
 
     assert_text 'User was successfully updated'
     assert page.has_content?('new_email@example.com')
     assert page.has_content?('myrad newname')
+    assert page.has_content?('wow-cool-slug')
   end
 
   test 'destroying a User' do

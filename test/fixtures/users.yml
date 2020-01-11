@@ -1,13 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: "readonly mctestpeasant"
+  name: "Readonly McTestpeasant"
   email: "baz@quuz.com"
+  slug: "readonly-mctestpeasant-101010101"
   activated: true
   activated_at: <%= Time.zone.now %>
 
 two:
-  name: "capn mctestquotes"
+  name: "Capn McTestquotes"
   email: "foo@bar.com"
+  slug: "capn-mctestquotes-101010101"
   activated: true
   activated_at: <%= Time.zone.now %>

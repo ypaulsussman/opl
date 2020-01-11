@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   resources :authors, param: :slug
-
-  resources :users, :authors, :quotes
+  resources :users, param: :slug
+  resources :quotes
 end

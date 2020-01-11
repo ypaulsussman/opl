@@ -15,9 +15,9 @@ class UsersController < ApplicationController
     @users = User.where(activated: true).page(params[:page])
   end
 
-  # GET /users/1
+  # GET /users/{slug}
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(slug: params[:slug])
     redirect_to root_url unless @user.activated?
   end
 
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # GET /users/1/edit
+  # GET /users/{slug}/edit
   def edit; end
 
   # POST /users
@@ -44,16 +44,19 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /users/{slug}
   def update
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
-      render :edit 
+      # Prevent conflict with confirm_correct_user
+      # on next update attempt, in case of non-unique slug
+      @user.slug = @user.slug_was
+      render :edit
     end
   end
 
-  # DELETE /users/1
+  # DELETE /users/{slug}
   def destroy
     @user.destroy
     redirect_to users_url, notice: 'User was successfully destroyed.'
@@ -62,7 +65,7 @@ class UsersController < ApplicationController
   private
 
   def confirm_correct_user
-    return if current_user?(User.find(params[:id]))
+    return if current_user?(User.find_by(slug: params[:slug]))
 
     confirm_admin
   end
@@ -81,10 +84,12 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(slug: params[:slug])
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :receive_qotd)
+    params
+      .require(:user)
+      .permit(:name, :email, :slug, :password, :password_confirmation, :receive_qotd)
   end
 end

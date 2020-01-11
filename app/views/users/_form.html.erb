@@ -11,16 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div>
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
+  <div>
     <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
 
+  <% if ["edit","update"].include? action_name %>
+    <div>
+      <%= form.label :slug, "Personal URL path" %>
+      <%= form.text_field :slug %>
+      <span><em>(Note: letters will be lowercased, and only lowercase letters, numbers, underscores, and hyphens will be preserved.)</em></span>
+    </div>
+  <% end %>
   <div>
     <%= form.label :password %>
     <%= form.password_field :password %>
@@ -38,7 +45,7 @@
     <% end %>
   </div>
 
-  <div class="actions">
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

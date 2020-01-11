@@ -17,7 +17,7 @@ class AuthorsController < ApplicationController
       .page(params[:page])
   end
 
-  # GET /authors/{uuid}
+  # GET /authors/{slug}
   def show; end
 
   # GET /authors/new
@@ -25,7 +25,7 @@ class AuthorsController < ApplicationController
     @author = Author.new
   end
 
-  # GET /authors/{uuid}/edit
+  # GET /authors/{slug}/edit
   def edit; end
 
   # POST /authors
@@ -39,7 +39,7 @@ class AuthorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /authors/{uuid}
+  # PATCH/PUT /authors/{slug}
   def update
     if @author.update(author_params)
       redirect_to @author, notice: 'Author was successfully updated.'
@@ -48,7 +48,7 @@ class AuthorsController < ApplicationController
     end
   end
 
-  # DELETE /authors/{uuid}
+  # DELETE /authors/{slug}
   def destroy
     @author.destroy!
     redirect_to authors_url, notice: 'Author was successfully destroyed.'

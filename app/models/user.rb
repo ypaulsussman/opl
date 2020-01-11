@@ -3,22 +3,23 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX =
     /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
+  VALID_SLUG_REGEX = /\A[a-z\d\-\_]+\z/.freeze
 
   self.implicit_order_column = 'email'
   attr_accessor :remember_me_token, :activation_token, :password_reset_token
 
   before_validation { email.downcase! }
-  before_create :create_activation_digest
+  before_create :create_activation_digest, :build_initial_slug
+  before_update -> { self.slug = slug.parameterize }, if: -> { slug_changed? }
 
   validates :name, presence: true, length: { maximum: 255 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  validates(
-    :email,
-    presence: true,
-    uniqueness: true,
-    length: { maximum: 255 },
-    format: { with: VALID_EMAIL_REGEX }
-  )
+  validates :slug, presence: true, uniqueness: true, on: :update
+  validates :email,
+            presence: true,
+            uniqueness: true,
+            length: { maximum: 255 },
+            format: VALID_EMAIL_REGEX
 
   has_secure_password
 
@@ -71,7 +72,15 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
 
+  def to_param
+    slug
+  end
+
   private
+
+  def build_initial_slug
+    self.slug = "#{name.parameterize}-#{SecureRandom.uuid}"
+  end
 
   def create_activation_digest
     self.activation_token = User.new_token
