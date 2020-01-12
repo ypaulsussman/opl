@@ -9,7 +9,7 @@ class QuotesController < ApplicationController
     @quotes = Quote.joins(:author).order('authors.slug').page(params[:page])
   end
 
-  # GET /quotes/{uuid}
+  # GET /quotes/{slug}
   def show; end
 
   # GET /quotes/new
@@ -18,7 +18,7 @@ class QuotesController < ApplicationController
     @author_id = params[:author_id]
   end
 
-  # GET /quotes/{uuid}/edit
+  # GET /quotes/{slug}/edit
   def edit; end
 
   # POST /quotes
@@ -32,7 +32,7 @@ class QuotesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /quotes/{uuid}
+  # PATCH/PUT /quotes/{slug}
   def update
     if @quote.update(quote_params)
       redirect_to @quote, notice: 'Quote was successfully updated.'
@@ -41,7 +41,7 @@ class QuotesController < ApplicationController
     end
   end
 
-  # DELETE /quotes/{uuid}
+  # DELETE /quotes/{slug}
   def destroy
     @quote.destroy
     redirect_to quotes_url, notice: 'Quote was successfully destroyed.'

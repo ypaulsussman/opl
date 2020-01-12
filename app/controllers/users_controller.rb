@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     else
       # Prevent conflict with confirm_correct_user
       # on next update attempt, in case of non-unique slug
-      @user.slug = @user.slug_was
+      @user.slug = @user.slug_was if @user.slug_changed?
       render :edit
     end
   end
