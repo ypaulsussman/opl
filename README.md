@@ -11,12 +11,12 @@ I'm writing this in January 2020, and by my private roadmap I'm - maybe - 2/3 of
 A couple more-detailed posts on the project will be trickling out at [ye olde miniblog](https://www.suss.world/) over the coming spring; in the interim, should you want to play around on a copy of your own, read on...
 
 ## Setup for Local Development
-  - Install Ruby 2.6.5 and PostgreSQL 11.5
+  - Install Ruby 2.7.0 and PostgreSQL 11.5
     - There's _probably_ some leeway with the PostgreSQL version, but Heroku and Bundler, at least, certainly won't like other versions of Ruby unless tell them to.
     - I recommend grabbing [Homebrew,](https://docs.brew.sh/Installation) then running
     - `brew install rbenv`
     - `rbenv init`
-    - `rbenv install 2.6.5`
+    - `rbenv install 2.7.0`
     - `brew install postgresql`
     - `brew services start postgresql`
   - We deliberately want to [install foreman outside the app's bundle](https://github.com/ddollar/foreman/wiki/Don't-Bundle-Foreman) -- run `gem install foreman`
