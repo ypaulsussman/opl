@@ -45,7 +45,7 @@ class QuotesControllerTest < ActionDispatch::IntegrationTest
   test 'should update quote for admin' do
     log_in_as(@user_dos)
     patch quote_url(@quote), params: { quote: { passage: 'voici! i am new again' } }
-    assert_redirected_to quote_url(@quote)
+    assert_redirected_to quote_url(@quote.reload)
   end
 
   test 'should destroy quote for admin' do

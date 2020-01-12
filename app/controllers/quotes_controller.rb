@@ -50,7 +50,7 @@ class QuotesController < ApplicationController
   private
 
   def set_quote
-    @quote = Quote.includes(:author).find(params[:id])
+    @quote = Quote.includes(:author).find_by(slug: params[:slug])
   end
 
   def quote_params

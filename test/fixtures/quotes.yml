@@ -2,8 +2,10 @@
 
 one:
   passage: "this is a very, very real quote"
+  slug: "this-is-a-very-very-real"
   author: one
 
 two:
   passage: "this quotation is also exceptionally real"
+  slug: "this-quotation-is-also-exceptionally"
   author: two
