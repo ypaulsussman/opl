@@ -19,6 +19,8 @@ class Quote < ApplicationRecord
   def build_slug
     return unless passage_changed? || new_record?
 
+    # if quote is long enough, grab the first sequence of words
+    # adding to >30 char; if not, give it a UUID
     opening_words = if passage[/(^.{0,30}\S*\s)/]
                       passage[/(^.{0,30}\S*\s)/][0..-2]
                     else
