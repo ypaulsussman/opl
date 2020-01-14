@@ -1,6 +1,6 @@
 <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
-    <div id="error_explanation">
+    <div class="notification is-danger">
       <h2><%= pluralize(user.errors.size, "error") %> prohibited this user from being saved:</h2>
 
       <ul>

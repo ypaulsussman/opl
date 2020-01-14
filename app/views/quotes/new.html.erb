@@ -1,8 +1,14 @@
 <h1>New Quote</h1>
 
-<%= render 'form', quote: @quote, author_id: @author_id %>
+<div class="columns">
+  <div class="column"></div>
+  <div class="column">
+    <%= render 'form', quote: @quote, author_id: @author_id %>
 
-<%-# @TODO: add 'create new author first?' display-toggle for authors form -%>
-<%= render 'authors/form', author: Author.new %>
-
-<%= link_to 'Back', quotes_path %>
+    <%-# @TODO: add 'create new author first?' display-toggle for authors form -%>
+    <%= render 'authors/form', author: Author.new %>
+  </div>
+  <div class="column">
+    <%= link_to 'Back', quotes_path %>
+  </div>
+</div>

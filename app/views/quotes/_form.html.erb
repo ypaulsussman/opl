@@ -1,28 +1,27 @@
-<%= form_with(model: quote, local: true) do |form| %>
-  <% if quote.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(quote.errors.size, "error") %> prohibited this quote from being saved:</h2>
+<div class="box">
+  <%= form_with(model: quote, local: true) do |form| %>
+    <% if quote.errors.any? %>
+      <div class="notification is-danger">
+        <h2><%= pluralize(quote.errors.size, "error") %> prohibited this quote from being saved:</h2>
 
-      <ul>
-        <% quote.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+        <ul>
+          <% quote.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form.text_area :passage, class: "textarea is-medium" %>
+    <%= collection_select(
+      :quote, 
+      :author_id, 
+      Author.order(:slug), 
+      :id, 
+      :name,
+      { selected: author_id },
+      {class: "select is-medium"}
+    )%>
+    <%= form.submit class: "button is-success is-medium is-outlined" %>
   <% end %>
-
-  <div class="actions">
-    <div class="input-fields">
-      <%= form.text_field :passage %>
-      <%= collection_select(
-        :quote, 
-        :author_id, 
-        Author.order(:slug), 
-        :id, 
-        :name,
-        { selected: author_id }
-      )%>
-    </div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
