@@ -23,7 +23,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     assert_template 'users/new'
     assert_select '.field_with_errors', 8
-    assert_select '#error_explanation > h2', text: '4 errors prohibited this user from being saved:'
+    assert_select '.usa-alert--error h2', text: '4 errors prohibited this user from being saved:'
   end
 
   # rubocop:disable Metrics/BlockLength

@@ -1,27 +1,20 @@
 <%= form_with model: quote, local: true, class: 'usa-form' do |form| %>
   <% if quote.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(quote.errors.size, "error") %> prohibited this quote from being saved:</h2>
-
-      <ul>
-        <% quote.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <%= render partial: 'layouts/errors', locals: {resource: quote} %>
   <% end %>
 
-  <%= form.label :passage, 'My Rad Quote' %>
-  <%= form.text_field :passage %>
+  <%= form.label :passage, 'My Rad Quote', class: 'usa-label' %>
+  <%= form.text_area :passage, class: 'usa-textarea' %>
 
-  <%= form.label :author_id, 'Choose an author' %>
+  <%= form.label :author_id, 'Choose an author', class: 'usa-label' %>
   <%= collection_select(
     :quote, 
     :author_id, 
     Author.order(:slug), 
     :id, 
     :name,
-    { selected: author_id }
-  )%>    </div>
+    { selected: author_id },
+    { class: 'usa-select' }
+  )%>
   <%= form.submit %>
 <% end %>

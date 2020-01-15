@@ -22,7 +22,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
             password_confirmation: 'foobar'
           } }
     assert_template 'users/edit'
-    assert_select '#error_explanation > h2', text: '3 errors prohibited this user from being saved:'
+    assert_select '.usa-alert--error h2', text: '3 errors prohibited this user from being saved:'
   end
 
   test 'edit successfully, with friendly forwarding' do
@@ -44,7 +44,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
           } }
     follow_redirect!
     assert_template 'users/show'
-    assert_select '#notice', text: 'User was successfully updated.'
+    assert_select '.usa-alert--notice > p', text: 'User was successfully updated.'
     @user.reload
     assert_equal @user.name, new_name
     assert_equal @user.email, new_email
