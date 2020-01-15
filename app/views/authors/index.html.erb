@@ -1,28 +1,39 @@
-<h1>Authors</h1>
-<span><%= link_to 'New Author', new_author_path %></span>
-<span><%= link_to 'See All Quotes', quotes_path %></span>
-
-<%= paginate @authors, window: 1, outer_window: 3 %>
+<h1>Browse Authors</h1>
 
 <table class="usa-table">
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @authors.each do |author| %>
       <tr>
-        <td><%= author.name%> - <%= pluralize(author.quotes_count, 'quote')%></td>
-        <td><%= link_to 'Show All Quotes', author %></td>
-        <% if current_user&.admin? %>
-          <td><%= link_to 'Edit Author', edit_author_path(author) %></td>
-        <% end %>
+        <td><%= link_to "#{author.name} - #{pluralize(author.quotes_count, 'quote')}", author %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<footer class="usa-footer usa-footer--slim">
+  <div class="usa-footer__primary-section">
+    <div class="usa-footer__primary-container grid-row">
+      <div class="mobile-lg:grid-col-8">
+        <nav class="usa-footer__nav">
+          <ul class="grid-row grid-gap">
+            <%= paginate @authors, window: 1, outer_window: 3 %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
 
+  <% if current_user&.admin? %>
+    <div class="usa-footer__secondary-section">
+      <div class="grid-container">
+        <div class="usa-footer__logo grid-row grid-gap-2">
+          <div class="grid-col-auto">
+            <h3 class="usa-footer__logo-heading">
+              <%= link_to 'New Author', new_author_path %>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</footer>

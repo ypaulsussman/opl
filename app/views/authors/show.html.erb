@@ -1,11 +1,11 @@
 <h1><%=@author.name%></h1>
-<table class="usa-table">
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
+<% if current_user&.admin? %>
+ <span><%= link_to 'Edit Author', edit_author_path(@author) %></span>
+<% end %>
+<%= link_to 'Back', url_options=:back %>
+
+<table class="usa-table">
   <tbody>
     <% @author.quotes.each do |quote| %>
       <tr>
@@ -18,7 +18,4 @@
   </tbody>
 </table>
 
-<% if current_user&.admin? %>
-  <%= link_to 'Edit Author', edit_author_path(@author) %> |
-<% end %>
-<%= link_to 'Back', url_options=:back %>
+
