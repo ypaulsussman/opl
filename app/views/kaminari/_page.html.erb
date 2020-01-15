@@ -7,6 +7,6 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<span class="mobile-lg:grid-col-6 desktop:grid-col-auto usa-footer__primary-content page<%= ' current' if page.current? %>">
+<h3 class="grid-col-auto usa-footer__primary-content page<%= ' current' if page.current? %>">
   <%= link_to_unless page.current?, page, url, {remote: remote, rel: page.rel, class: 'text-bold text-gray-90'} %>
-</span>
+</h3>

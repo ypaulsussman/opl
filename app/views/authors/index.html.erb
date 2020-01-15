@@ -1,4 +1,7 @@
 <h1>Browse Authors</h1>
+<% if current_user&.admin? %>
+<span><%= link_to 'New Author', new_author_path %></span>
+<% end %>
 
 <table class="usa-table">
   <tbody>
@@ -22,18 +25,4 @@
       </div>
     </div>
   </div>
-
-  <% if current_user&.admin? %>
-    <div class="usa-footer__secondary-section">
-      <div class="grid-container">
-        <div class="usa-footer__logo grid-row grid-gap-2">
-          <div class="grid-col-auto">
-            <h3 class="usa-footer__logo-heading">
-              <%= link_to 'New Author', new_author_path %>
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
 </footer>

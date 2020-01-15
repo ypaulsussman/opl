@@ -6,6 +6,6 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<span class="first mobile-lg:grid-col-6 desktop:grid-col-auto usa-footer__primary-content">
+<h3 class="first  grid-col-auto usa-footer__primary-content">
   <%= link_to_unless current_page.first?, t('views.pagination.first').html_safe, url, remote: remote, class: 'text-bold text-gray-90' %>
-</span>
+</h3>
