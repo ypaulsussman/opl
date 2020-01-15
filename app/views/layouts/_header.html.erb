@@ -13,6 +13,16 @@
         <div class="usa-nav">
           <nav class="usa-accordion">
             <ul class="usa-nav__primary usa-accordion">
+            <% if controller_name != 'quotes'%>
+              <li class="usa-nav__primary-item">
+                <%= link_to "Browse Quotes", quotes_path %>
+              </li>
+            <% end %>
+            <% if controller_name != 'authors'%>
+              <li class="usa-nav__primary-item">
+                <%= link_to "Browse Authors", authors_path %>
+              </li>
+            <% end %>
             <% if logged_in? %>
               <li class="usa-nav__primary-item">
                 <%= link_to "My Settings", edit_user_path(current_user) %>
