@@ -9,14 +9,14 @@ class AuthorsTest < ApplicationSystemTestCase
 
   test 'visiting the index' do
     visit root_url
-    click_link 'See All Authors'
+    click_link 'Browse Authors'
     assert_selector 'h1', text: 'Authors'
   end
 
   test 'creating an Author' do
     log_in_as(@admin)
     visit root_url
-    click_link 'See All Authors'
+    click_link 'Browse Authors'
     click_on 'New Author'
 
     fill_in 'author_name', with: 'awesome wit'
@@ -29,7 +29,7 @@ class AuthorsTest < ApplicationSystemTestCase
   test 'updating an Author' do
     log_in_as(@admin)
     visit root_url
-    click_link 'See All Authors'
+    click_link 'Johannes Notrealerton'
     click_on 'Edit Author', match: :first
 
     fill_in 'author_name',  with: 'meep morp'
@@ -42,7 +42,7 @@ class AuthorsTest < ApplicationSystemTestCase
   test 'destroying an Author' do
     log_in_as(@admin)
     visit root_url
-    click_link 'See All Authors'
+    click_link 'Michaela Equallefake'
     click_on 'Edit Author', match: :first
 
     page.accept_confirm do
