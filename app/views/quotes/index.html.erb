@@ -1,9 +1,15 @@
 <h1>Browse Quotes</h1>
-<% if current_user&.admin? %>
-  <%= link_to 'New Quote', new_quote_path %>
-<% end %>
-<span><%= link_to 'See All Authors', authors_path %></span>
-<%= paginate @quotes, window: 1, outer_window: 3 %>
+
+
+<form class="usa-search usa-search--big">
+  <div role="search">
+    <label class="usa-sr-only" for="search-field-big">Search</label>
+    <input class="usa-input" id="search-field-big" type="search" name="search">
+    <button class="usa-button" type="submit">
+      <span class="usa-search__submit-text">Search</span>
+    </button>
+  </div>
+</form>
 
 <table class="usa-table">
   <tbody>
@@ -19,3 +25,11 @@
     <% end %>
   </tbody>
 </table>
+
+
+<% if current_user&.admin? %>
+  <%= link_to 'New Quote', new_quote_path %>
+<% end %>
+<span><%= link_to 'See All Authors', authors_path %></span>
+
+<%= paginate @quotes, window: 1, outer_window: 3 %>
