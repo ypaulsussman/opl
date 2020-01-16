@@ -1,32 +1,38 @@
-<h1>Browse Quotes</h1>
-<% if current_user&.admin? %>
-  <%= link_to 'New Quote', new_quote_path %>
-<% end %>
-
-<form class="usa-search usa-search--big">
-  <div role="search">
-    <label class="usa-sr-only" for="search-field-big">Search</label>
-    <input class="usa-input" id="search-field-big" type="search" name="search">
-    <button class="usa-button" type="submit">
-      <span class="usa-search__submit-text">Search</span>
-    </button>
-  </div>
-</form>
-
-<table class="usa-table">
-  <tbody>
-    <% @quotes.each do |quote| %>
-      <tr>
-        <td>
-          "<em><%= quote.passage%></em>" - <span><%= link_to "#{quote.author.name}", quote.author %></span>
-        </td>
-        <% if current_user&.admin? %>
-          <td><%= link_to 'Edit', edit_quote_path(quote) %></td>
-        <% end %>
-      </tr>
+<div class="grid-container">
+  <div class="grid-row">
+    <h1>Browse Quotes</h1>
+    <% if current_user&.admin? %>
+      <%= link_to 'New Quote', new_quote_path %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+  <div class="grid-row">
+    <form class="usa-search usa-search--big long-input-field">
+      <div role="search">
+        <label class="usa-sr-only" for="search-field-big">Search</label>
+        <input class="usa-input" id="search-field-big" type="search" name="search">
+        <button class="usa-button" type="submit">
+          <span class="usa-search__submit-text">Search</span>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="grid-row">
+    <table class="usa-table">
+      <tbody>
+        <% @quotes.each do |quote| %>
+          <tr>
+            <td>
+              "<em><%= quote.passage%></em>" - <span><%= link_to "#{quote.author.name}", quote.author %></span>
+            </td>
+            <% if current_user&.admin? %>
+              <td><%= link_to 'Edit', edit_quote_path(quote) %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <footer class="usa-footer usa-footer--slim">
   <div class="usa-footer__primary-section">

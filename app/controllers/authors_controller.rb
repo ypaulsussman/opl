@@ -15,6 +15,11 @@ class AuthorsController < ApplicationController
       Author
       .order(by_quotes_count)
       .page(params[:page])
+      .per(36)
+
+    @authors1 = @authors.to_a.to(11)
+    @authors2 = @authors.to_a.from(12).to(23)
+    @authors3 = @authors.to_a.from(24).to(35)
   end
 
   # GET /authors/{slug}
