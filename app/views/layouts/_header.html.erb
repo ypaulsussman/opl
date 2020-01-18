@@ -1,54 +1,48 @@
-<a class="usa-skipnav" href="#main-content">Skip to main content</a>
-<div class="usa-banner">
-  <div class="usa-accordion">
-    <header class="usa-header usa-header--basic">
-      <div class="usa-nav-container">
-        <div class="usa-navbar">
-          <div class="usa-logo">
-            <em class="usa-logo__text">
-              <%= link_to "Other People's Lines", root_path %>
-            </em>
-          </div>
-        </div>
-        <div class="usa-nav">
-          <nav class="usa-accordion">
-            <ul class="usa-nav__primary usa-accordion">
-            <% if controller_name != 'quotes'%>
-              <li class="usa-nav__primary-item">
-                <%= link_to "Browse Quotes", quotes_path %>
-              </li>
-            <% end %>
-            <% if controller_name != 'authors'%>
-              <li class="usa-nav__primary-item">
-                <%= link_to "Browse Authors", authors_path %>
-              </li>
-            <% end %>
-            <% if logged_in? %>
-              <li class="usa-nav__primary-item">
-                <%= link_to "My Settings", edit_user_path(current_user) %>
-              </li>
-              <% if current_user&.admin? %>
-                <li class="usa-nav__primary-item">
-                  <%= link_to "All Users", users_path %>
-                </li>
-              <% end %>
-              <li class="usa-nav__primary-item">
-                <%= link_to "Log Out", logout_path, method: :delete %>
-              </li>
-            <% else %>
-              <li class="usa-nav__primary-item">
-                <%= link_to "Log In", login_path %>
-              </li>
-              <% if Rails.configuration.allow_signups %>
-                <li class="usa-nav__primary-item">
-                  <%= link_to "Sign Up", signup_path %>
-                </li>
-              <% end %>
-            <% end %>
-            </ul>
-          </nav>
-        </div>  
+<div class="usa-overlay"></div>
+<header class="usa-header usa-header--basic">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo" id="basic-logo">
+        <em class="usa-logo__text"><a href="/" title="Home" aria-label="Home">Project title</a></em>
       </div>
-    </header>
+      <button class="usa-menu-btn">Menu</button>
+    </div>
+    <nav aria-label="Primary navigation" class="usa-nav">
+      <button class="usa-nav__close"><img src="/assets/img/close.svg" alt="close"></button>
+      <ul class="usa-nav__primary usa-accordion">
+        <% if controller_name != 'quotes'%>
+          <li class="usa-nav__primary-item">
+            <%= link_to "Browse Quotes", quotes_path, class: "usa-nav__link" %>
+          </li>
+        <% end %>
+        <% if controller_name != 'authors'%>
+          <li class="usa-nav__primary-item">
+            <%= link_to "Browse Authors", authors_path, class: "usa-nav__link" %>
+          </li>
+        <% end %>
+        <% if logged_in? %>
+          <% if current_user&.admin? %>
+            <li class="usa-nav__primary-item">
+              <%= link_to "All Users", users_path, class: "usa-nav__link" %>
+            </li>
+          <% end %>
+          <li class="usa-nav__primary-item">
+            <%= link_to "My Settings", edit_user_path(current_user), class: "usa-nav__link" %>
+          </li>
+          <li class="usa-nav__primary-item">
+            <%= link_to "Log Out", logout_path, method: :delete, class: "usa-nav__link" %>
+          </li>
+        <% else %>
+          <li class="usa-nav__primary-item">
+            <%= link_to "Log In", login_path, class: "usa-nav__link" %>
+          </li>
+          <% if Rails.configuration.allow_signups %>
+            <li class="usa-nav__primary-item">
+              <%= link_to "Sign Up", signup_path, class: "usa-nav__link" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </nav>
   </div>
-</div>
+</header>
