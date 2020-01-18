@@ -65,7 +65,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
         }
       }
     )
-    assert_select 'div#error_explanation'
+    assert_select 'li.usa-alert__text'
     # Empty password
     patch(
       password_reset_path(user.password_reset_token),
@@ -77,7 +77,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
         }
       }
     )
-    assert_select 'div#error_explanation'
+    assert_select 'li.usa-alert__text'
     # Valid password & confirmation
     patch(
       password_reset_path(user.password_reset_token),
