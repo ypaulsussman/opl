@@ -1,9 +1,13 @@
-<% provide(:title, "Forgot password") %> 
-<h1>Forgot password</h1>
-<div>
-  <%= form_with(url: password_resets_path, scope: :password_reset, local: true) do |f| %>
-    <%= f.label :email %>
-    <%= f.email_field :email%>
-    <%= f.submit "Submit", class: "usa-button usa-button--outline" %> 
-  <% end %>
+<% provide :title, "Forgot password" %> 
+<div class="grid-container">
+  <div class="grid-row">
+    <div class="grid-col-auto">
+      <h1>Forgot password</h1>
+      <%= form_with(url: password_resets_path, scope: :password_reset, local: true) do |f| %>
+        <%= f.label :email %>
+        <%= f.email_field :email%>
+        <%= f.submit "Submit", class: "usa-button usa-button--outline" %> 
+      <% end %>
+    </div>
+  </div>
 </div>

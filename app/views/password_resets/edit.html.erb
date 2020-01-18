@@ -1,28 +1,23 @@
-<% provide(:title, "Forgot password") %> 
-<h1>Reset Password</h1>
+<% provide :title, "Forgot password" %> 
+<div class="grid-container">
+  <div class="grid-row">
+    <div class="grid-col-auto">
+    <h1>Reset Password</h1>
+      <%= form_with(model: @user, url: password_reset_path(params[:id]), local: true) do |f| %>
+        <% if @user.errors.any? %>
+            <%= render partial: 'layouts/errors', locals: {resource: @user} %>
+        <% end %>
 
-<div>
-  <%= form_with(model: @user, url: password_reset_path(params[:id]), local: true) do |f| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+        <%= hidden_field_tag :email, @user.email %>
 
-        <ul>
-          <% @user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+        <%= f.label :password, class: 'usa-label' %>
+        <%= f.password_field :password, class: 'usa-input' %>
 
-    <%= hidden_field_tag :email, @user.email %>
+        <%= f.label :password_confirmation, 'Confirmation', class: 'usa-label' %>
+        <%= f.password_field :password_confirmation, class: 'usa-input' %>
 
-    <%= f.label :password, class: 'usa-label' %>
-    <%= f.password_field :password, class: 'usa-input' %>
-
-    <%= f.label :password_confirmation, 'Confirmation', class: 'usa-label' %>
-    <%= f.password_field :password_confirmation, class: 'usa-input' %>
-
-    <%= f.submit "Update Password", class: "usa-button usa-button--outline" %> 
-  <% end %>
+        <%= f.submit "Update Password", class: "usa-button usa-button--outline" %> 
+      <% end %>
+    </div>
+  </div>
 </div>

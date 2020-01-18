@@ -13,15 +13,21 @@
 
   <body>
     <%= render 'layouts/header' %>
-    <% flash.each do |message_type, message| %>
-      <div class="usa-alert usa-alert--<%= message_type %>" role="alert">
-        <div class="usa-alert__body">
-          <p class="usa-alert__text">
-            <%= message %>
-          </p>
+    <div class="grid-container">
+      <div class="grid-row">
+        <div class="grid-col-auto">
+          <% flash.each do |message_type, message| %>
+            <div class="usa-alert usa-alert--<%= message_type %>" role="alert">
+              <div class="usa-alert__body">
+                <p class="usa-alert__text">
+                  <%= message %>
+                </p>
+              </div>
+            </div>
+          <% end %>
+          </div>
         </div>
       </div>
-    <% end %>
     <%= yield %>
   </body>
 </html>
