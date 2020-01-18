@@ -17,9 +17,28 @@ class AuthorsController < ApplicationController
       .page(params[:page])
       .per(36)
 
-    @authors1 = @authors.to_a.to(11)
-    @authors2 = @authors.to_a.from(12).to(23)
-    @authors3 = @authors.to_a.from(24).to(35)
+    @authors_in_threes = @authors.to_a.each_with_object([]).with_index do |(author, ait_agg), i|
+      if (i % 3).zero?
+        ait_agg.push([author])
+      else
+        ait_agg[-1].push(author)
+      end
+    end
+
+    # @authors_in_threes = @authors.to_a.each_with_index.reduce([]) do |ait, (a, i)|
+    #   if (i % 3).zero?
+    #     ait.push([a])
+    #     puts "ya ait! #{ait}, and index: #{i}"
+    #   else
+    #     puts "we adding to #{ait[-1]}"
+    #     ait[-1].push(a)
+    #   end
+    #   ait
+    # end
+
+    # @authors1 = @authors.to_a.to(11)
+    # @authors2 = @authors.to_a.from(12).to(23)
+    # @authors3 = @authors.to_a.from(24).to(35)
   end
 
   # GET /authors/{slug}
