@@ -7,14 +7,14 @@
       <tbody>
         <% @authors_in_threes.each do |a| %>
           <tr>
-            <td><%= link_to "#{a[0][:name]} - #{pluralize(a[0][:quotes_count], 'quote')}", a[0] %></td>
+            <td><%= link_to "#{a[0][:name]} (#{pluralize(a[0][:quotes_count], 'line')})", a[0], class: "author-link" %></td>
             <% if a[1].present? %>
               <td></td>
-              <td><%= link_to "#{a[1][:name]} - #{pluralize(a[1][:quotes_count], 'quote')}", a[1] %></td>
+              <td><%= link_to "#{a[1][:name]} (#{pluralize(a[0][:quotes_count], 'line')})", a[1], class: "author-link" %></td>
             <% end %>
             <% if a[2].present? %>
               <td></td>
-              <td><%= link_to "#{a[2][:name]} - #{pluralize(a[2][:quotes_count], 'quote')}", a[2] %></td>
+              <td><%= link_to "#{a[2][:name]} (#{pluralize(a[0][:quotes_count], 'line')})", a[2], class: "author-link" %></td>
             <% end %>
           </tr>
         <% end %>
@@ -22,7 +22,7 @@
     </table>
   </div>
 </div>
-<footer class="usa-footer usa-footer--slim sticky-footer">
+<footer class="usa-footer usa-footer--slim">
   <div class="usa-footer__primary-section">
     <div class="usa-footer__primary-container grid-row">
       <nav class="usa-footer__nav">

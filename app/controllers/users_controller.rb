@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   # DELETE /users/{slug}
   def destroy
     @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+    redirect_to users_url, flash: { info: 'User was successfully destroyed.' }
   end
 
   private
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     return if logged_in?
 
     store_forwarding_url
-    flash[:danger] = 'Please log in.'
+    flash[:warning] = 'Please log in.'
     redirect_to login_path
   end
 

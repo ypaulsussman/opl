@@ -2,18 +2,16 @@
   margin-top: 0;
 }
 
-footer.sticky-footer {
-  position: fixed; 
-  bottom: 0px; 
-  width: 100%;
-}
-
-form.long-input-field {
-  width: 799px;
+.spacing-off-header {
+  margin-top: 24px;
 }
 
 .usa-header {
   background-color: rgb(240, 240, 240);
+}
+
+form.long-input-field {
+  width: 799px;
 }
 
 .usa-checkbox {
@@ -24,6 +22,34 @@ form.long-input-field {
   margin-bottom: 0;
 }
 
-.spacing-off-header {
-  margin-top: 24px;
+a.author-link, 
+a.edit-quote-link, 
+a.author-from-quote-link {
+  text-decoration: none;
+  color: #3d4551;
+}
+
+a.author-link, 
+a.edit-quote-link {
+  display: block;
+  padding: 0.5rem 1rem;
+}
+
+a.author-link:hover, 
+a.edit-quote-link:hover, 
+a.author-from-quote-link:hover {
+  color: #005ea2;
+}
+
+a.author-link:hover, 
+a.edit-quote-link:hover {
+  background-color:#f0f0f0;
+}
+
+a.author-link:hover {
+  font-weight: bold;
+}
+
+td.lil-space{
+  padding: 24px
 }

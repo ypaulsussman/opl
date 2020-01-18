@@ -1,4 +1,4 @@
-<%= form_with model: quote, local: true, class: 'usa-f' do |f| %>
+<%= form_with model: quote, local: true, class: 'usa-form' do |f| %>
   <% if quote.errors.any? %>
     <%= render partial: 'layouts/errors', locals: {resource: quote} %>
   <% end %>

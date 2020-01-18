@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
         redirect_to root_url
       end
     else
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:warning] = 'Invalid email/password combination'
       render 'new'
     end
   end
@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
   def authenticate_user
     return if submitted_user&.authenticate(params[:session][:password])
 
-    flash.now[:danger] = 'Invalid email/password combination'
+    flash.now[:warning] = 'Invalid email/password combination'
     render 'new'
   end
 end

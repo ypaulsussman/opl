@@ -2,7 +2,7 @@
   <div class="grid-row">
     <div class="grid-col-auto">
     <h1>Reset Password</h1>
-      <%= form_with(model: @user, url: password_reset_path(params[:id]), local: true) do |f| %>
+      <%= form_with model: @user, url: password_reset_path(params[:id], local: true), class: 'usa-form' do |f| %>
         <% if @user.errors.any? %>
             <%= render partial: 'layouts/errors', locals: {resource: @user} %>
         <% end %>

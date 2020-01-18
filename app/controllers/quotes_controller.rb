@@ -28,7 +28,7 @@ class QuotesController < ApplicationController
     @quote = Quote.new(quote_params)
 
     if @quote.save
-      redirect_to @quote.author, notice: 'Quote was successfully created.'
+      redirect_to @quote.author, flash: { success: 'Quote was successfully created.' }
     else
       render :new
     end
@@ -37,7 +37,7 @@ class QuotesController < ApplicationController
   # PATCH/PUT /quotes/{slug}
   def update
     if @quote.update(quote_params)
-      redirect_to @quote.author, notice: 'Quote was successfully updated.'
+      redirect_to @quote.author, flash: { success: 'Quote was successfully updated.' }
     else
       render :edit
     end
@@ -46,7 +46,7 @@ class QuotesController < ApplicationController
   # DELETE /quotes/{slug}
   def destroy
     @quote.destroy
-    redirect_to quotes_url, notice: 'Quote was successfully destroyed.'
+    redirect_to quotes_url, flash: { info: 'Quote was successfully destroyed.' }
   end
 
   private

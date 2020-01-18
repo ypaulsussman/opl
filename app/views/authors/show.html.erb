@@ -11,9 +11,11 @@
         <tbody>
           <% @author.quotes.each do |quote| %>
             <tr>
-              <td>"<em><%= quote.passage%></em>"</td>
+              <td class="lil-space">
+              "<%= quote.passage%>"
+              </td>
               <% if current_user&.admin? %>
-                <td><%= link_to 'Edit', edit_quote_path(quote) %></td>
+                <td><%= link_to 'Edit', edit_quote_path(quote), class: "edit-quote-link" %></td>
               <% end %>
             </tr>
           <% end %>

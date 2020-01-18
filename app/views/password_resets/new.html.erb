@@ -2,9 +2,9 @@
   <div class="grid-row">
     <div class="grid-col-auto">
       <h1>Forgot password</h1>
-      <%= form_with(url: password_resets_path, scope: :password_reset, local: true) do |f| %>
-        <%= f.label :email %>
-        <%= f.email_field :email%>
+      <%= form_with url: password_resets_path, scope: :password_reset, local: true, class: 'usa-form' do |f| %>
+        <%= f.label :email, class: 'usa-label' %>
+        <%= f.email_field :email, class: 'usa-input'%>
         <%= f.submit "Submit", class: "usa-button usa-button--outline" %> 
       <% end %>
     </div>

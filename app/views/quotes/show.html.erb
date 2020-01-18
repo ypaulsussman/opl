@@ -1,6 +1,0 @@
-"<em><%= @quote.passage %></em>" - <span><%=@quote.author.name%></span>
-<div>
-  <% if current_user&.admin? %>
-    <%= link_to 'Edit', edit_quote_path(@quote) %> |
-  <% end %>
-</div>

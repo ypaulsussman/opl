@@ -44,7 +44,7 @@ class AuthorsController < ApplicationController
     @author = Author.new(author_params)
 
     if @author.save
-      redirect_to new_quote_path(author_id: @author.id), notice: AUTHOR_CREATED_MESSAGE
+      redirect_to new_quote_path(author_id: @author.id), flash: { success: AUTHOR_CREATED_MESSAGE }
     else
       render :new
     end
@@ -53,7 +53,7 @@ class AuthorsController < ApplicationController
   # PATCH/PUT /authors/{slug}
   def update
     if @author.update(author_params)
-      redirect_to @author, notice: 'Author was successfully updated.'
+      redirect_to @author, flash: { success: 'Author was successfully updated.' }
     else
       render :edit
     end
@@ -62,7 +62,7 @@ class AuthorsController < ApplicationController
   # DELETE /authors/{slug}
   def destroy
     @author.destroy!
-    redirect_to authors_url, notice: 'Author was successfully destroyed.'
+    redirect_to authors_url, flash: { info: 'Author was successfully destroyed.' }
   end
 
   private
