@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Opl</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,9 +15,11 @@
     <%= render 'layouts/header' %>
     <% flash.each do |message_type, message| %>
       <div class="usa-alert usa-alert--<%= message_type %>" role="alert">
-        <p class="usa-alert__text">
-          <%= message %>
-        </p>
+        <div class="usa-alert__body">
+          <p class="usa-alert__text">
+            <%= message %>
+          </p>
+        </div>
       </div>
     <% end %>
     <%= yield %>

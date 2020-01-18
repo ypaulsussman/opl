@@ -1,43 +1,28 @@
-<%= form_with(model: user, local: true) do |form| %>
+<%= form_with model: user, local: true do |f| %>
   <% if user.errors.any? %>
     <%= render partial: 'layouts/errors', locals: {resource: user} %>
   <% end %>
 
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+  <%= f.label :name, class: 'usa-label' %>
+  <%= f.text_field :name %>
 
-  <div>
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
+  <%= f.label :email, class: 'usa-label' %>
+  <%= f.text_field :email %>
 
   <% if ["edit","update"].include? action_name %>
-    <div>
-      <%= form.label :slug, "Personal URL path" %>
-      <%= form.text_field :slug %>
-      <span><em>(Note: letters will be lowercased, and only lowercase letters, numbers, underscores, and hyphens will be preserved.)</em></span>
-    </div>
+    <%= f.label :slug, "Personal URL path", class: 'usa-label' %>
+    <%= f.text_field :slug %>
+    <span><em>(Note: letters will be lowercased, and only lowercase letters, numbers, underscores, and hyphens will be preserved.)</em></span>
   <% end %>
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
+
+  <%= f.label :password, class: 'usa-label' %>
+  <%= f.password_field :password %>
+
+  <%= f.label :password_confirmation, class: 'usa-label' %>
+  <%= f.password_field :password_confirmation %>
+
+  <%= f.check_box :receive_qotd, class: 'usa-checkbox__input' %>
+  <%= f.label :remember_me, "I'd like to receive a randomly-selected quote by daily email.", class: 'usa-checkbox__label' %> 
   
-  <div>
-    <%= form.label :password_confirmation, "Confirmation" %>
-    <%= form.password_field :password_confirmation %>
-  </div>
-
-  <div>
-    <%= form.label :receive_qotd do %> 
-      <%= form.check_box :receive_qotd %>
-      <span>I'd like to receive a randomly-selected quote by daily email.</span>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= f.submit nil, class: "usa-button usa-button--outline" %>
 <% end %>

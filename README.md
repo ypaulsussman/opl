@@ -16,7 +16,7 @@ A couple more-detailed posts on the project will be trickling out at [ye olde mi
     - I recommend grabbing [Homebrew,](https://docs.brew.sh/Installation) then running
     - `brew install rbenv`
     - `rbenv init`
-    - `rbenv install 2.7.0`
+    - `rbenv install 2.6.5`
     - `brew install postgresql`
     - `brew services start postgresql`
   - We deliberately want to [install foreman outside the app's bundle](https://github.com/ddollar/foreman/wiki/Don't-Bundle-Foreman) -- run `gem install foreman`

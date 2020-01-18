@@ -1,12 +1,12 @@
-<%= form_with model: quote, local: true, class: 'usa-form' do |form| %>
+<%= form_with model: quote, local: true, class: 'usa-f' do |f| %>
   <% if quote.errors.any? %>
     <%= render partial: 'layouts/errors', locals: {resource: quote} %>
   <% end %>
 
-  <%= form.label :passage, 'My Rad Quote', class: 'usa-label' %>
-  <%= form.text_area :passage, class: 'usa-textarea' %>
+  <%= f.label :passage, 'My Rad Quote', class: 'usa-label' %>
+  <%= f.text_area :passage, class: 'usa-textarea' %>
 
-  <%= form.label :author_id, 'Choose an author', class: 'usa-label' %>
+  <%= f.label :author_id, 'Choose an author', class: 'usa-label' %>
   <%= collection_select(
     :quote, 
     :author_id, 
@@ -16,5 +16,5 @@
     { selected: author_id },
     { class: 'usa-select' }
   )%>
-  <%= form.submit %>
+  <%= f.submit nil, class: "usa-button usa-button--outline" %>
 <% end %>

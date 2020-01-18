@@ -1,10 +1,10 @@
-<%= form_with(model: author, local: true) do |form| %>
+<%= form_with model: author, local: true do |f| %>
   <% if author.errors.any? %>
     <%= render partial: 'layouts/errors', locals: {resource: author} %>
   <% end %>
 
-  <div class="actions">
-    <%= form.text_field :name %>
-    <%= form.submit %>
-  </div>
+    <%= f.label :name, "New Author's Name:", class: 'usa-label' %>
+    <%= f.text_field :name, class: 'usa-input' %>
+
+    <%= f.submit nil, class: "usa-button usa-button--outline" %>
 <% end %>
