@@ -1,6 +1,24 @@
 <div class="grid-container">
   <div class="grid-row">
     <h1>Browse Authors</h1>
+    <%= button_to(
+      "Order by name", 
+      {}, 
+      { 
+        method: :get, 
+        params: {sort_by: 'name'}, 
+        class: 'usa-button sort-toggle', 
+        disabled: (@current_sort == 'name')
+      } )%>
+    <%= button_to(
+      "Order by quotes", 
+      {}, 
+      { 
+        method: :get, 
+        params: {sort_by: 'quotes'}, 
+        class: 'usa-button sort-toggle', 
+        disabled: (@current_sort == 'quotes') 
+      }) %>
   </div>
   <div class="grid-row">
     <table class="usa-table usa-table--borderless woof-no-top-margin">
@@ -10,11 +28,11 @@
             <td><%= link_to "#{a[0][:name]} (#{pluralize(a[0][:quotes_count], 'line')})", a[0], class: "author-link" %></td>
             <% if a[1].present? %>
               <td></td>
-              <td><%= link_to "#{a[1][:name]} (#{pluralize(a[0][:quotes_count], 'line')})", a[1], class: "author-link" %></td>
+              <td><%= link_to "#{a[1][:name]} (#{pluralize(a[1][:quotes_count], 'line')})", a[1], class: "author-link" %></td>
             <% end %>
             <% if a[2].present? %>
               <td></td>
-              <td><%= link_to "#{a[2][:name]} (#{pluralize(a[0][:quotes_count], 'line')})", a[2], class: "author-link" %></td>
+              <td><%= link_to "#{a[2][:name]} (#{pluralize(a[2][:quotes_count], 'line')})", a[2], class: "author-link" %></td>
             <% end %>
           </tr>
         <% end %>

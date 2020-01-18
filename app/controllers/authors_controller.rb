@@ -8,13 +8,17 @@ class AuthorsController < ApplicationController
 
   # GET /authors
   def index
-    # @Y: use for sort toggle
-    # by_name = 'slug ASC, quotes_count DESC'
-    by_quotes_count = 'quotes_count DESC, slug ASC'
+    if params[:sort_by] == 'name'
+      @sort_sql = 'slug ASC, quotes_count DESC'
+      @current_sort = 'name'
+    else
+      @sort_sql = 'quotes_count DESC, slug ASC'
+      @current_sort = 'quotes'
+    end
 
-    @authors = Author.order(by_quotes_count).page(params[:page]).per(36)
+    @authors = Author.order(@sort_sql).page(params[:page]).per(36)
 
-    # Yes, this is gross: its function is to turn the AR Relation of authors into a nested array,
+    # Yes, this is gross: tl;dr it turns (the AR Relation of authors) into a nested array,
     # with the inner arrays each containing three (or, in the final case, 1-3) author-records.
     @authors_in_threes = @authors.to_a.each_with_object([]).with_index do |(author, ait_agg), i|
       if (i % 3).zero?
@@ -69,6 +73,6 @@ class AuthorsController < ApplicationController
   end
 
   def author_params
-    params.fetch(:author, {}).permit(:name, quote_attributes: [:passage, :id, :_destroy])
+    params.fetch(:author, {}).permit(:name, :sort_by, quote_attributes: [:passage, :id, :_destroy])
   end
 end
