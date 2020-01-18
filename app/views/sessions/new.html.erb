@@ -1,7 +1,6 @@
 <div class="grid-container">
   <div class="grid-row">
     <div class="grid-col-auto">
-      <% provide :title, "Log in" %> 
       <h1>Log in</h1>
       <div>
         <%= form_with url: login_path, scope: :session, local: true, class: 'usa-form' do |f| %> 
