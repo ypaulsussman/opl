@@ -42,9 +42,8 @@ class UsersEditTest < ActionDispatch::IntegrationTest
             password_confirmation: 'foobar',
             receive_qotd: true
           } }
-    follow_redirect!
-    assert_template 'users/show'
-    assert_select '.usa-alert--notice p', text: 'User was successfully updated.'
+    assert_template 'users/edit'
+    assert_select '.usa-alert--info p', text: 'User was successfully updated.'
     @user.reload
     assert_equal @user.name, new_name
     assert_equal @user.email, new_email

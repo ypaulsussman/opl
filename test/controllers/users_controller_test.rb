@@ -71,11 +71,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     Rails.configuration.allow_signups = true
   end
 
-  test 'should show user' do
-    get user_url(@user_uno)
-    assert_response :success
-  end
-
   test 'should get edit when user is logged in' do
     log_in_as(@user_uno)
     get edit_user_url(@user_uno)
@@ -97,7 +92,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test 'should update user when user is logged in' do
     log_in_as(@user_uno)
     patch(user_url(@user_uno), params: { user: @user_changes_boilerplate })
-    assert_redirected_to user_url(@user_uno)
+    assert_response :success
+    assert_equal @user_uno.reload.name, 'User McUserton'
   end
 
   test 'should redirect update when user is not logged in' do

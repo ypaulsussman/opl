@@ -79,9 +79,9 @@ class UsersTest < ApplicationSystemTestCase
     click_on 'Update User'
 
     assert_text 'User was successfully updated'
-    assert page.has_content?('new_email@example.com')
-    assert page.has_content?('myrad newname')
-    assert page.has_content?('wow-cool-slug')
+    assert page.has_field?('user_email', with: 'new_email@example.com')
+    assert page.has_field?('user_name', with: 'myrad newname')
+    assert page.has_field?('user_slug', with: 'wow-cool-slug')
   end
 
   test 'destroying a User' do

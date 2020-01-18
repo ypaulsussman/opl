@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
   before_action :confirm_logged_in, only: [:index, :edit, :update]
   before_action :confirm_correct_user, only: [:edit, :update]
   before_action :confirm_admin, only: [:index, :destroy]
@@ -13,12 +13,6 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.where(activated: true).page(params[:page])
-  end
-
-  # GET /users/{slug}
-  def show
-    @user = User.find_by(slug: params[:slug])
-    redirect_to root_url unless @user.activated?
   end
 
   # GET /users/new
@@ -47,13 +41,13 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/{slug}
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
-    else
+      flash.now[:info] = 'User was successfully updated.'
+    elsif @user.slug_changed?
       # Prevent conflict with confirm_correct_user
       # on next update attempt, in case of non-unique slug
-      @user.slug = @user.slug_was if @user.slug_changed?
-      render :edit
+      @user.slug = @user.slug_was
     end
+    render :edit
   end
 
   # DELETE /users/{slug}

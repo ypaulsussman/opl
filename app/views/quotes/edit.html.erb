@@ -1,5 +1,11 @@
-<h1>Editing Quote</h1>
+<div class="grid-container">
+  <div class="grid-row">
+    <div class="grid-col-auto">
+      <h1>Editing Quote</h1>
 
-<%= render 'form', quote: @quote, author_id: @quote.author.id %>
+      <%= render 'form', quote: @quote, author_id: @quote.author.id %>
 
-<%= link_to 'Remove Quote', @quote, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Remove Quote', @quote, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+</div>

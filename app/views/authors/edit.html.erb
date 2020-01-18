@@ -1,23 +1,28 @@
-<h1>Editing Author</h1>
+<div class="grid-container">
+  <div class="grid-row">
+    <div class="grid-col-auto">
+    <h1>Editing Author</h1>
 
-<%= render 'form', author: @author %>
+    <%= render 'form', author: @author %>
 
-<table class="usa-table">
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <table class="usa-table">
+      <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @author.quotes.each do |quote| %>
-      <tr>
-        <td>"<em><%= quote.passage%></em>"</td>
-        <td><%= link_to 'Edit Quote', edit_quote_path(quote) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @author.quotes.each do |quote| %>
+          <tr>
+            <td>"<em><%= quote.passage%></em>"</td>
+            <td><%= link_to 'Edit Quote', edit_quote_path(quote) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<%= link_to 'Remove Author', @author, method: :delete, data: { confirm: 'Are you sure? This will also remove all their quotes.' } %>
-<%= link_to 'Back', url_options=:back %>
+    <%= link_to 'Remove Author', @author, method: :delete, data: { confirm: 'Are you sure? This will also remove all their quotes.' } %>
+    </div>
+  </div>
+</div>

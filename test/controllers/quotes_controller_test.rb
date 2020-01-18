@@ -14,12 +14,7 @@ class QuotesControllerTest < ActionDispatch::IntegrationTest
     get quotes_url
     assert_response :success
   end
-
-  test 'should show quote' do
-    get quote_url(@quote)
-    assert_response :success
-  end
-
+  
   test 'should get new for admin' do
     log_in_as(@user_dos)
     get new_quote_url
@@ -33,7 +28,7 @@ class QuotesControllerTest < ActionDispatch::IntegrationTest
       post quotes_url, params: { quote: { passage: 'tis i, a new quote', author_id: author.id } }
     end
     newest_quote = Quote.order(created_at: :asc).last
-    assert_redirected_to quote_url(newest_quote)
+    assert_redirected_to author_url(newest_quote.author)
   end
 
   test 'should get edit for admin' do
@@ -45,7 +40,7 @@ class QuotesControllerTest < ActionDispatch::IntegrationTest
   test 'should update quote for admin' do
     log_in_as(@user_dos)
     patch quote_url(@quote), params: { quote: { passage: 'voici! i am new again' } }
-    assert_redirected_to quote_url(@quote.reload)
+    assert_redirected_to author_url(@quote.reload.author)
   end
 
   test 'should destroy quote for admin' do

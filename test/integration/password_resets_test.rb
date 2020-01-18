@@ -91,7 +91,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     )
     assert currently_logged_in?
     assert_not flash.empty?
-    assert_redirected_to user
+    assert_redirected_to root_url
   end
   # rubocop:enable Metrics/BlockLength
 

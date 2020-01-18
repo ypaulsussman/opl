@@ -28,7 +28,8 @@ class QuotesTest < ApplicationSystemTestCase
     click_on 'Create Quote'
 
     assert_text 'Quote was successfully created'
-    assert page.has_content?('"yo peep my new quote!" - Johannes Notrealerton')
+    assert_text '"yo peep my new quote!"'
+    assert_text 'Johannes Notrealerton'
   end
 
   test 'updating a Quote' do
@@ -48,7 +49,8 @@ class QuotesTest < ApplicationSystemTestCase
     click_on 'Update Quote'
 
     assert_text 'Quote was successfully updated'
-    assert page.has_content?('"wow look at this fresh quote" - Michaela Equallefake')
+    assert_text '"wow look at this fresh quote"'
+    assert_text 'Michaela Equallefake'
   end
 
   test 'destroying a Quote' do

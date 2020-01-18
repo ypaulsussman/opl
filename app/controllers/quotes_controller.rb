@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class QuotesController < ApplicationController
-  before_action :confirm_admin, except: [:index, :show]
-  before_action :set_quote, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_admin, except: [:index]
+  before_action :set_quote, only: [:edit, :update, :destroy]
 
   # GET /quotes
   def index
@@ -13,9 +13,6 @@ class QuotesController < ApplicationController
       .page(params[:page])
       .per(12)
   end
-
-  # GET /quotes/{slug}
-  def show; end
 
   # GET /quotes/new
   def new
@@ -31,7 +28,7 @@ class QuotesController < ApplicationController
     @quote = Quote.new(quote_params)
 
     if @quote.save
-      redirect_to @quote, notice: 'Quote was successfully created.'
+      redirect_to @quote.author, notice: 'Quote was successfully created.'
     else
       render :new
     end
@@ -40,7 +37,7 @@ class QuotesController < ApplicationController
   # PATCH/PUT /quotes/{slug}
   def update
     if @quote.update(quote_params)
-      redirect_to @quote, notice: 'Quote was successfully updated.'
+      redirect_to @quote.author, notice: 'Quote was successfully updated.'
     else
       render :edit
     end

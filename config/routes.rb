@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
 
-  resources :authors, :quotes, :users, param: :slug
+  resources :authors, param: :slug
+  resources :quotes, :users, except: [:show], param: :slug
+  resources :users, except: [:show], param: :slug
 end
