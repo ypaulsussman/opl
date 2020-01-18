@@ -12,7 +12,7 @@
           <% @author.quotes.each do |quote| %>
             <tr>
               <td class="lil-cell-space">
-              "<%= quote.passage%>"
+              <%= quote.passage%>
               </td>
               <% if current_user&.admin? %>
                 <td><%= link_to 'Edit', edit_quote_path(quote), class: "edit-quote-link" %></td>
