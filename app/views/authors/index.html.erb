@@ -1,22 +1,19 @@
 <div class="grid-container">
   <div class="grid-row">
     <h1>Browse Authors</h1>
-    <% if current_user&.admin? %>
-    <span><%= link_to 'New Author', new_author_path %></span>
-    <% end %>
   </div>
   <div class="grid-row">
-    <table class="usa-table woof-no-top-margin">
+    <table class="usa-table usa-table--borderless woof-no-top-margin">
       <tbody>
         <% @authors1.each_index do |i| %>
           <tr>
             <td><%= link_to "#{@authors1[i][:name]} - #{pluralize(@authors1[i][:quotes_count], 'quote')}", @authors1[i] %></td>
             <% if @authors2[i].present? %>
-              <td class="empty-cells"></td>
+              <td></td>
               <td><%= link_to "#{@authors2[i][:name]} - #{pluralize(@authors2[i][:quotes_count], 'quote')}", @authors2[i] %></td>
             <% end %>
             <% if @authors3[i].present? %>
-              <td class="empty-cells"></td>
+              <td></td>
               <td><%= link_to "#{@authors3[i][:name]} - #{pluralize(@authors3[i][:quotes_count], 'quote')}", @authors3[i] %></td>
             <% end %>
           </tr>

@@ -1,9 +1,6 @@
 <div class="grid-container">
   <div class="grid-row">
     <h1>Browse Quotes</h1>
-    <% if current_user&.admin? %>
-      <%= link_to 'New Quote', new_quote_path %>
-    <% end %>
   </div>
   <div class="grid-row">
     <form class="usa-search usa-search--big long-input-field">
@@ -17,7 +14,7 @@
     </form>
   </div>
   <div class="grid-row">
-    <table class="usa-table">
+    <table class="usa-table usa-table--borderless">
       <tbody>
         <% @quotes.each do |quote| %>
           <tr>
