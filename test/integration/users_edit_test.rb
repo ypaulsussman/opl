@@ -44,7 +44,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
           } }
     follow_redirect!
     assert_template 'users/show'
-    assert_select '.usa-alert--notice > p', text: 'User was successfully updated.'
+    assert_select '.usa-alert--notice p', text: 'User was successfully updated.'
     @user.reload
     assert_equal @user.name, new_name
     assert_equal @user.email, new_email

@@ -27,7 +27,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in 'Name', with: 'newuser mcuserton'
     fill_in 'Email', with: 'new_user@example.com'
     fill_in 'Password', with: 'foobar'
-    fill_in 'Confirmation', with: 'foobar'
+    fill_in 'Password confirmation', with: 'foobar'
     assert_emails 1 do
       click_button 'Create User'
     end
@@ -47,7 +47,7 @@ class UsersTest < ApplicationSystemTestCase
     ActionMailer::Base.deliveries.clear
     visit root_url
     click_link 'Log In'
-    click_link '(forgot password)'
+    click_link 'Forgot password?'
     fill_in 'Email', with: 'foo@bar.com'
     assert_emails 1 do
       click_button 'Submit'
