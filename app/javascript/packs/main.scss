@@ -2,8 +2,12 @@
   margin-top: 0;
 }
 
-.spacing-off-header {
+.static-vertical-spacing {
   margin-top: 24px;
+}
+
+td.lil-cell-space{
+  padding: 24px
 }
 
 .usa-header {
@@ -48,8 +52,4 @@ a.edit-quote-link:hover {
 
 a.author-link:hover {
   font-weight: bold;
-}
-
-td.lil-space{
-  padding: 24px
 }

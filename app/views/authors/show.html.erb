@@ -11,7 +11,7 @@
         <tbody>
           <% @author.quotes.each do |quote| %>
             <tr>
-              <td class="lil-space">
+              <td class="lil-cell-space">
               "<%= quote.passage%>"
               </td>
               <% if current_user&.admin? %>

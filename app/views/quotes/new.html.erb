@@ -3,8 +3,6 @@
     <div class="grid-col-auto">
       <h1>New Quote</h1>
       <%= render 'form', quote: @quote, author_id: @author_id %>
-      <%-# @TODO: add 'create new author first?' display-toggle for authors form -%>
-      <%= render 'authors/form', author: Author.new %>
     </div>
   </div>
 </div>

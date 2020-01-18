@@ -10,7 +10,13 @@
     <nav aria-label="Primary navigation" class="usa-nav">
       <button class="usa-nav__close"><strong>Close</strong></button>
       <ul class="usa-nav__primary usa-accordion">
-        <%= render partial: 'layouts/resources_nav', locals: {controller: controller_name, admin: current_user&.admin?} %>
+        <%= render(
+          partial: 'layouts/resources_nav', 
+          locals: { 
+            controller: controller_name,
+            action: action_name, 
+            admin: current_user&.admin?
+          }) %>
         <% if logged_in? %>
           <% if current_user&.admin? %>
             <li class="usa-nav__primary-item">

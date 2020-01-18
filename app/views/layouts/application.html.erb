@@ -8,25 +8,28 @@
     <%= csp_meta_tag %>
 
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= render 'layouts/header' %>
-    <div class="grid-container spacing-off-header">
-      <div class="grid-row">
-        <div class="grid-col-auto">
-          <% flash.each do |message_type, message| %>
-            <div class="usa-alert usa-alert--<%= message_type %>" role="alert">
-              <div class="usa-alert__body">
-                <p class="usa-alert__text">
-                  <%= message %>
-                </p>
+    <% if flash.present? %>
+      <div class="grid-container static-vertical-spacing">
+        <div class="grid-row">
+          <div class="grid-col-auto">
+            <% flash.each do |message_type, message| %>
+              <div class="usa-alert usa-alert--<%= message_type %>" role="alert">
+                <div class="usa-alert__body">
+                  <p class="usa-alert__text">
+                    <%= message %>
+                  </p>
+                </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
           </div>
         </div>
       </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

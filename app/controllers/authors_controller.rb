@@ -11,11 +11,8 @@ class AuthorsController < ApplicationController
     # @Y: use for sort toggle
     # by_name = 'slug ASC, quotes_count DESC'
     by_quotes_count = 'quotes_count DESC, slug ASC'
-    @authors =
-      Author
-      .order(by_quotes_count)
-      .page(params[:page])
-      .per(36)
+
+    @authors = Author.order(by_quotes_count).page(params[:page]).per(36)
 
     # Yes, this is gross: its function is to turn the AR Relation of authors into a nested array,
     # with the inner arrays each containing three (or, in the final case, 1-3) author-records.

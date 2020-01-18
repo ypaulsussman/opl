@@ -18,7 +18,7 @@
       <tbody>
         <% @quotes.each do |quote| %>
           <tr>
-            <td class="lil-space">
+            <td class="lil-cell-space">
               "<em><%= quote.passage%></em>" — <%= link_to "#{quote.author.name}", quote.author, class: "author-from-quote-link" %>
             </td>
             <% if current_user&.admin? %>
