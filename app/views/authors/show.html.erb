@@ -3,7 +3,6 @@
 <% if current_user&.admin? %>
  <span><%= link_to 'Edit Author', edit_author_path(@author) %></span>
 <% end %>
-<%= link_to 'Back', url_options=:back %>
 
 <table class="usa-table">
   <tbody>
