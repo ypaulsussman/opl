@@ -21,7 +21,7 @@ A couple more-detailed posts on the project will be trickling out at [ye olde mi
     - `brew services start postgresql`
   - We deliberately want to [install foreman outside the app's bundle](https://github.com/ddollar/foreman/wiki/Don't-Bundle-Foreman) -- run `gem install foreman`
   - Pull from GitHub with that beautiful green `Clone or download` button above
-  - `cd` into the directory and `bundle install`
+  - `cd` into the directory; `bundle install` and `yarn install`
   - `rails db:prepare` -- this is Rails 6, baby; we can get idempotent!
   - `rake populate_send_at_date_for_quotes` will ensure all initially-seeded quotes have a send-at date
   - _Possibly_ both `bundle exec rails webpacker:install` then `yarn install`, but likely just the latter: try it first
