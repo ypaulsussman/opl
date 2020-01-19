@@ -5,20 +5,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
-# Use SCSS for stylesheets
-gem 'sassc-rails', '~> 2.1'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem 'puma', '~> 4.1'
+# Transpile app-like JavaScript
 gem 'webpacker', '~> 4.0'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+# Navigate your web application faster
 gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
 # Provide pagination
 gem 'kaminari', '~> 1.1'
 # Provide queueing for async jobs
@@ -28,10 +23,11 @@ gem 'bcrypt', '~> 3.1.7'
 # Role models are important
 gem 'rubocop'
 
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+# Maddeningly, sprockets 4+ requires a manifest.js file, even if
+# you're not _actually_ using it to compile your assets:
+# https://github.com/rails/sprockets/issues/643
+# https://github.com/rails/sprockets/issues/654
+gem 'sprockets', '~>3.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

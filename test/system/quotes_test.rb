@@ -28,7 +28,7 @@ class QuotesTest < ApplicationSystemTestCase
     click_on 'Create Quote'
 
     assert_text 'Quote was successfully created'
-    assert_text '"yo peep my new quote!"'
+    assert_text 'yo peep my new quote!'
     assert_text 'Johannes Notrealerton'
   end
 
@@ -49,7 +49,7 @@ class QuotesTest < ApplicationSystemTestCase
     click_on 'Update Quote'
 
     assert_text 'Quote was successfully updated'
-    assert_text '"wow look at this fresh quote"'
+    assert_text 'wow look at this fresh quote'
     assert_text 'Michaela Equallefake'
   end
 

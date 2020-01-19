@@ -5,9 +5,6 @@
 
 require("@rails/ujs").start()
 require("turbolinks").start()
-// Not currently using ActiveStorage or ActionCable
-// require("@rails/activestorage").start()
-// require("channels")
 
 require('uswds/dist/css/uswds')
 require("uswds")
