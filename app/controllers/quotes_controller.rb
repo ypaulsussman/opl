@@ -6,12 +6,16 @@ class QuotesController < ApplicationController
 
   # GET /quotes
   def index
-    @quotes =
-      Quote
-      .joins(:author)
-      .order('authors.slug')
-      .page(params[:page])
-      .per(12)
+    if params[:search_string].present?
+      puts "Ya boiz! #{params[:search_string]}"
+    else
+      @quotes =
+        Quote
+        .joins(:author)
+        .order('authors.slug')
+        .page(params[:page])
+        .per(12)
+    end
   end
 
   # GET /quotes/new
@@ -49,6 +53,11 @@ class QuotesController < ApplicationController
     redirect_to quotes_url, flash: { info: 'Quote was successfully destroyed.' }
   end
 
+  # GET /quotes/search
+  def search
+    puts "ya request: #{request.inspect}"
+  end
+
   private
 
   def set_quote
@@ -56,6 +65,6 @@ class QuotesController < ApplicationController
   end
 
   def quote_params
-    params.fetch(:quote, {}).permit(:passage, :author_id)
+    params.fetch(:quote, {}).permit(:passage, :author_id, :search_string)
   end
 end

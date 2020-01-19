@@ -15,12 +15,16 @@ input.sort-toggle{
   margin-left: 21px;
 }
 
-.usa-header {
-  background-color: rgb(240, 240, 240);
+input#search-field-big {
+  max-width: none;
+  width: calc(100% - 384px);
+  margin-left: 192px;
+  border-right-style: solid;
+  border-right-width: 1px
 }
 
-form.long-input-field {
-  width: 799px;
+.usa-header {
+  background-color: rgb(240, 240, 240);
 }
 
 .usa-checkbox {

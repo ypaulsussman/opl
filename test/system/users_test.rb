@@ -11,7 +11,7 @@ class UsersTest < ApplicationSystemTestCase
     log_in_as(@non_admin)
     visit users_url
     assert_selector 'h1', text: 'Quotes'
-    assert_equal current_path, root_path
+    assert_equal current_path, quotes_path
     click_link 'Log Out'
     log_in_as(@admin)
     click_link 'All Users'

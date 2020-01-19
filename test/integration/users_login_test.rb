@@ -40,6 +40,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     delete logout_path
     assert_redirected_to root_path
     follow_redirect!
+    assert_redirected_to quotes_path
+    follow_redirect!
     assert_template 'quotes/index'
     assert_select 'a[href=?]', login_path
     assert_select 'a[href=?]', logout_path, count: 0

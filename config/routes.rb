@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'quotes#index'
+  root to: redirect('/quotes')
 
   get '/signup', to: 'users#new'
   get '/login', to: 'sessions#new'
@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   resources :authors, param: :slug
-  resources :quotes, :users, except: [:show], param: :slug
   resources :users, except: [:show], param: :slug
+  resources :quotes, :users, except: [:show], param: :slug
 end
