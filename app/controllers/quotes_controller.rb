@@ -6,6 +6,7 @@ class QuotesController < ApplicationController
 
   # GET /quotes
   def index
+    @search_term = params[:search]
     @quotes =
       Quote
       .filtered(params[:search])

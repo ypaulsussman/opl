@@ -1,9 +1,8 @@
 <div class="grid-container">
   <div class="grid-row">
-    <h1>Browse Quotes</h1>
+    <h1>Browse Quotes <%= "(containing \"#{@search_term}\")" if @search_term.present? %></h1>
   </div>
   <div class="grid-row">
-    <%# <div class="grid-col-4"></div> %>
     <div class="grid-col-fill">
       <form class="usa-search usa-search--big">
         <label class="usa-sr-only" for="search-field-big">Search</label>
@@ -12,20 +11,24 @@
     </div>
   </div>
   <div class="grid-row">
-    <table class="usa-table usa-table--borderless">
-      <tbody>
-        <% @quotes.each do |quote| %>
-          <tr>
-            <td class="lil-cell-space">
-              "<em><%= quote.passage%></em>" — <%= link_to "#{quote.author.name}", quote.author, class: "author-from-quote-link" %>
-            </td>
-            <% if current_user&.admin? %>
-              <td><%= link_to 'Edit', edit_quote_path(quote), class: "edit-quote-link" %></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% if @quotes.present? %>
+      <table class="usa-table usa-table--borderless">
+        <tbody>
+          <% @quotes.each do |quote| %>
+            <tr>
+              <td class="lil-cell-space">
+                "<em><%= quote.passage%></em>" — <%= link_to "#{quote.author.name}", quote.author, class: "author-from-quote-link" %>
+              </td>
+              <% if current_user&.admin? %>
+                <td><%= link_to 'Edit', edit_quote_path(quote), class: "edit-quote-link" %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="no-results">No quotes found! #LazySuss 🙀</div>
+    <% end %>
   </div>
 </div>
 
