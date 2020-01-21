@@ -10,6 +10,13 @@ class Quote < ApplicationRecord
   after_update :remove_orphaned_author
   after_destroy -> { author.destroy }, if: -> { author.quotes_count.zero? }
 
+  scope :filtered,
+        lambda { |search_string|
+          if search_string.present?
+            where("to_tsvector('english', passage) @@ to_tsquery('english', ?)", search_string)
+          end
+        }
+
   def to_param
     slug
   end

@@ -13,5 +13,5 @@ Rails.application.routes.draw do
 
   resources :authors, param: :slug
   resources :users, except: [:show], param: :slug
-  resources :quotes, :users, except: [:show], param: :slug
+  resources :quotes, except: [:show], param: :slug
 end
