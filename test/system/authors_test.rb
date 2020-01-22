@@ -10,7 +10,15 @@ class AuthorsTest < ApplicationSystemTestCase
   test 'visiting the index' do
     visit root_url
     click_link 'Browse Authors'
-    assert_selector 'h1', text: 'Authors'
+    assert_selector 'h1', text: 'Browse Authors'
+    # by quotes-count: notrealerton first; equallefake second
+    assert_selector '.author-link:first-of-type', text: 'Johannes Notrealerton'
+    assert_selector '.author-link:last-of-type', text: 'Michaela Equallefake'
+    # click toggle
+    click_button 'Order by name'
+    # by sortable-name: equallefake first; notrealerton second
+    assert_selector '.author-link:first-of-type', text: 'Michaela Equallefake'
+    assert_selector '.author-link:last-of-type', text: 'Johannes Notrealerton'
   end
 
   test 'creating an Author' do
@@ -29,7 +37,7 @@ class AuthorsTest < ApplicationSystemTestCase
   test 'updating an Author' do
     log_in_as(@admin)
     visit root_url
-    click_link 'Johannes Notrealerton'
+    click_link 'Johannes Notrealerton', match: :first
     click_on 'Edit Author', match: :first
 
     fill_in 'author_name',  with: 'meep morp'
@@ -50,7 +58,7 @@ class AuthorsTest < ApplicationSystemTestCase
     end
 
     assert_text 'Author was successfully destroyed'
-    # TODO: once you've added differentiators via CSS selector,
-    # navigate to root_url to assert all dependent quotes were deleted
+    click_on 'Browse Quotes'
+    assert_no_text 'this quotation is also exceptionally real'
   end
 end

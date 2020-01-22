@@ -10,8 +10,14 @@ class QuotesTest < ApplicationSystemTestCase
   test 'visiting the index' do
     visit root_url
     assert_selector 'h1', text: 'Quotes'
-    assert page.has_content?('this is a very, very real quote')
-    assert page.has_content?('this quotation is also exceptionally real')
+    assert page.has_content? 'this is a very, very real quote'
+    assert page.has_content? 'this quotation is also exceptionally real'
+    assert page.has_content? 'wow peep how authentic this quote is'
+    fill_in 'search-field-big', with: 'real'
+    click_on 'Search'
+    assert page.has_content? 'this is a very, very real quote'
+    assert page.has_content? 'this quotation is also exceptionally real'
+    refute page.has_content? 'wow peep how authentic this quote is'
   end
 
   test 'creating a Quote' do

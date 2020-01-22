@@ -6,6 +6,11 @@ one:
   author: one
 
 two:
+  passage: "wow peep how authentic this quote is"
+  slug: "wow-peep-how-authentic-this-quote"
+  author: one
+
+three:
   passage: "this quotation is also exceptionally real"
   slug: "this-quotation-is-also-exceptionally"
   author: two
