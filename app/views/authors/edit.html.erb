@@ -16,13 +16,13 @@
         <% @author.quotes.each do |quote| %>
           <tr>
             <td>"<em><%= quote.passage%></em>"</td>
-            <td><%= link_to 'Edit Quote', edit_quote_path(quote) %></td>
+            <td><%= link_to 'Edit Quote', edit_quote_path(quote), class: 'usa-link' %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
 
-    <%= link_to 'Remove Author', @author, method: :delete, data: { confirm: 'Are you sure? This will also remove all their quotes.' } %>
+    <%= link_to 'Remove Author', @author, method: :delete, data: { confirm: 'Are you sure? This will also remove all their quotes.' }, class: 'usa-link' %>
     </div>
   </div>
 </div>

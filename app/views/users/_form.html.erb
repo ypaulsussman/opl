@@ -12,7 +12,7 @@
   <% if ["edit","update"].include? action_name %>
     <%= f.label :slug, "Personal URL path", class: 'usa-label' %>
     <%= f.text_field :slug, class: 'usa-input' %> 
-    <span><em>(Only lowercase letters, numbers, underscores, and hyphens will be preserved.)</em></span>
+    <div><em>(Only lowercase letters, numbers, underscores, and hyphens will be preserved.)</em></div>
   <% end %>
 
   <%= f.label :password, class: 'usa-label' %>

@@ -23,7 +23,9 @@
                 "<em><%= quote.passage%></em>" — <%= link_to "#{quote.author.name}", quote.author, class: "author-from-quote-link" %>
               </td>
               <% if current_user&.admin? %>
-                <td><%= link_to 'Edit', edit_quote_path(quote), class: "edit-quote-link" %></td>
+                <td>
+                  <%= link_to 'Edit', edit_quote_path(quote), class: "edit-quote-link" %>
+                </td>
               <% end %>
             </tr>
           <% end %>

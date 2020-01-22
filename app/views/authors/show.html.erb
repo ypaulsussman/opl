@@ -4,7 +4,12 @@
       <h1><%=@author.name%></h1>
 
       <% if current_user&.admin? %>
-      <span><%= link_to 'Edit Author', edit_author_path(@author) %></span>
+        <span class="author-options">
+          <%= link_to 'Edit Author', edit_author_path(@author), class: 'usa-link' %>
+          </span>
+        <span class="author-options">
+          <%= link_to "New Quote", new_quote_path(author_id: @author.id), class: 'usa-link' %>
+        </span>
       <% end %>
 
       <table class="usa-table usa-table--borderless">
