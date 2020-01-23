@@ -13,7 +13,7 @@ class Quote < ApplicationRecord
   scope :filtered,
         lambda { |search_string|
           if search_string.present?
-            where("to_tsvector('english', passage) @@ to_tsquery('english', ?)", search_string)
+            where("to_tsvector('english', passage) @@ plainto_tsquery('english', ?)", search_string)
           end
         }
 
