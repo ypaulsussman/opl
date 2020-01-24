@@ -25,14 +25,12 @@
       <tbody>
         <% @authors_in_threes.each do |a| %>
           <tr>
-            <td><%= link_to "#{a[0][:name]} (#{pluralize(a[0][:quotes_count], 'line')})", a[0], class: "author-link" %></td>
+            <td><%= render 'authorial_link', author: a[0] %></td>
             <% if a[1].present? %>
-              <td></td>
-              <td><%= link_to "#{a[1][:name]} (#{pluralize(a[1][:quotes_count], 'line')})", a[1], class: "author-link" %></td>
+              <td class="central-author"><%= render 'authorial_link', author: a[1] %></td>
             <% end %>
             <% if a[2].present? %>
-              <td></td>
-              <td><%= link_to "#{a[2][:name]} (#{pluralize(a[2][:quotes_count], 'line')})", a[2], class: "author-link" %></td>
+              <td class="right-author"><%= render 'authorial_link', author: a[2] %></td>
             <% end %>
           </tr>
         <% end %>

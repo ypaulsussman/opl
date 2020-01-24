@@ -4,8 +4,9 @@
       <h1>Editing Quote</h1>
 
       <%= render 'form', quote: @quote, author_id: @quote.author.id %>
+      <br>
+      <%= link_to 'Remove Quote', @quote, method: :delete, data: { confirm: 'Are you sure?' }, class: 'usa-link' %>
 
-      <%= link_to 'Remove Quote', @quote, method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
   </div>
 </div>

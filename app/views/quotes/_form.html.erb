@@ -1,4 +1,5 @@
 <%= form_with model: quote, local: true, class: 'usa-form' do |f| %>
+
   <% if quote.errors.any? %>
     <%= render partial: 'layouts/errors', locals: {resource: quote} %>
   <% end %>
@@ -16,8 +17,12 @@
     { selected: author_id },
     { class: 'usa-select' }
   )%>
-  <div class="static-vertical-spacing">
-    <%= link_to "Create a new author", new_author_path, class: 'usa-link' %>
-  </div>
+  
+  <% unless author_id.present? %>
+    <div class="static-vertical-spacing">
+      <%= link_to "Create a new author", new_author_path, class: 'usa-link' %>
+    </div>
+  <% end %>
+
   <%= f.submit nil, class: "usa-button usa-button--outline" %>
 <% end %>
