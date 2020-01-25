@@ -82,8 +82,9 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params
-      .require(:user)
-      .permit(:name, :email, :slug, :password, :password_confirmation, :receive_qotd)
+    up = params
+         .require(:user)
+         .permit(:name, :email, :slug, :password, :password_confirmation, :receive_qotd)
+    up.each { |_k, v| v.strip! if v.respond_to?('strip!') }
   end
 end

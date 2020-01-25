@@ -23,7 +23,7 @@ class PopulateSendAtDateForQuotesJobTest < ActiveJob::TestCase
     @new_quote = Quote.create!(passage: 'foo', author: @author)
     assert_nil @new_quote.next_send_at
     PopulateSendAtDateForQuotesJob.perform_now(1)
-    assert_equal Time.zone.tomorrow.midnight, @new_quote.reload.next_send_at
+    assert_equal Date.tomorrow, @new_quote.reload.next_send_at
   end
 
   test 'adds closest empty send-at date when other quotes are present' do
@@ -33,6 +33,6 @@ class PopulateSendAtDateForQuotesJobTest < ActiveJob::TestCase
 
     assert_nil @new_quote.next_send_at
     PopulateSendAtDateForQuotesJob.perform_now(1)
-    assert_equal (Time.zone.tomorrow + 2.days).midnight, @new_quote.reload.next_send_at
+    assert_equal (Date.tomorrow + 2.days), @new_quote.reload.next_send_at
   end
 end

@@ -58,6 +58,7 @@ class QuotesController < ApplicationController
   end
 
   def quote_params
-    params.fetch(:quote, {}).permit(:passage, :author_id, :search)
+    qp = params.fetch(:quote, {}).permit(:passage, :author_id, :search)
+    qp.each { |_k, v| v.strip! if v.respond_to?('strip!') }
   end
 end

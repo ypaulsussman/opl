@@ -73,6 +73,9 @@ class AuthorsController < ApplicationController
   end
 
   def author_params
-    params.fetch(:author, {}).permit(:name, :sort_by, quote_attributes: [:passage, :id, :_destroy])
+    ap = params
+         .fetch(:author, {})
+         .permit(:name, :sort_by, quote_attributes: [:passage, :id, :_destroy])
+    ap.each { |_k, v| v.strip! if v.respond_to?('strip!') }
   end
 end
