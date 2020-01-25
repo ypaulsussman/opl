@@ -4,8 +4,9 @@ class SendQotdEmailJob < ApplicationJob
   queue_as :default
 
   def perform
-    quote = Quote.includes(:author).find_by(next_send_at: Date.today)
+    quote = Quote.includes(:author).find_by(times_sent: 0)
 
+    # TODO: send 'hey, increment times_sent' mail to Admin
     return unless quote.present?
 
     User.where(receive_qotd: true).find_each do |user|
@@ -14,8 +15,7 @@ class SendQotdEmailJob < ApplicationJob
 
     quote.update_columns(
       times_sent: (quote.times_sent += 1),
-      most_recently_sent_at: quote.next_send_at,
-      next_send_at: nil
+      most_recently_sent_at: Date.today
     )
   end
 end

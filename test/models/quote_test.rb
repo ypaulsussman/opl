@@ -23,7 +23,7 @@ class QuoteTest < ActiveSupport::TestCase
   class QuoteUpdateTest < QuoteTest
     setup do
       @old_author = authors(:one)
-      @quote_one = Quote.create!(passage: 'foo', author: @old_author, next_send_at: Date.today)
+      @quote_one = Quote.create!(passage: 'foo', author: @old_author)
       @new_author = authors(:two)
     end
 
@@ -42,7 +42,7 @@ class QuoteTest < ActiveSupport::TestCase
   class QuoteDeletionTest < QuoteTest
     setup do
       @quote_author = authors(:one)
-      @quote_one = Quote.create!(passage: 'foo', author: @quote_author, next_send_at: Date.today)
+      @quote_one = Quote.create!(passage: 'foo', author: @quote_author)
     end
 
     test 'on quote deletion, deletes orphan authors' do

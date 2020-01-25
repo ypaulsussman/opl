@@ -4,7 +4,7 @@ require 'test_helper'
 
 class SendQotdEmailJobTest < ActiveJob::TestCase
   setup do
-    @our_qotd = quotes(:one)
+    Quote.all.each { |q| q.update!(times_sent: 1) }
 
     @subbed_user = users(:one)
     @subbed_user.update_attribute(:receive_qotd, true)
@@ -14,14 +14,15 @@ class SendQotdEmailJobTest < ActiveJob::TestCase
 
   test 'does nothing if no quote is available for today' do
     assert_no_difference('ActionMailer::Base.deliveries.count') do
-      @our_qotd.update!(next_send_at: Date.tomorrow)
       SendQotdEmailJob.perform_now
     end
   end
 
   test "sends today's quote solely to subscribed users" do
+    @our_qotd = Quote.first
+    @our_qotd.update_attribute(:times_sent, 0)
+
     assert_difference('ActionMailer::Base.deliveries.count', 1) do
-      @our_qotd.update!(next_send_at: Date.today)
       SendQotdEmailJob.perform_now
     end
 
