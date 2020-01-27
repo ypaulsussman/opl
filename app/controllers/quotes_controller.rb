@@ -47,8 +47,12 @@ class QuotesController < ApplicationController
 
   # DELETE /quotes/{slug}
   def destroy
-    @quote.destroy
-    redirect_to quotes_url, flash: { info: 'Quote was successfully destroyed.' }
+    next_route = @quote.author.quotes_count > 1 ? @quote.author : quotes_url
+    if @quote.destroy
+      redirect_to next_route, flash: { info: 'Quote was successfully destroyed.' }
+    else
+      render :edit
+    end
   end
 
   private

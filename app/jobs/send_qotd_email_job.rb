@@ -4,7 +4,13 @@ class SendQotdEmailJob < ApplicationJob
   queue_as :default
 
   def perform
-    quote = Quote.includes(:author).find_by(times_sent: 0)
+    # w/o 'order', uses uuid; w/ 'find_by', appears to order by created_at?
+    quote =
+      Quote
+      .includes(:author)
+      .where(times_sent: 0)
+      .order('RANDOM()')
+      .first
 
     # TODO: send 'hey, increment times_sent' mail to Admin
     return unless quote.present?

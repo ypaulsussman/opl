@@ -20,8 +20,7 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # TODO: once you drop a custom CNAME on Heroku, set this up?
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Email setup w/ Heroku's SendGrid Addon
   config.action_mailer.perform_caching = false
