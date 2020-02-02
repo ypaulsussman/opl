@@ -6,11 +6,11 @@ I'm inherently wary of building [inert knowledge](https://en.wikipedia.org/wiki/
 
 As such, I set out an experiment: I'd (_build a slightly-more-complex-than-CRUD app_) in parallel to (_reading through and, as appropriate, Ankifying the official [Rails Guides](https://guides.rubyonrails.org/)_). 
 
-I eventually settled on writing an app through which I could (_manage and routinely email myself_) quotes from a thousand-record plaintext file I'd been lackadaisically populating since my late... teens... (_!_)
+I eventually settled on writing an app through which I could (_manage and routinely email myself_) quotes from a thousand-record plaintext file I'd been lackadaisically populating since my late... teens...
 
 Shortly into the project, I realized two things: 
 
-1. auth, full-text search, and frontend asset-management would just never come easy to me w/o deliberate engagement; and 
+1. \[_auth, full-text search, and frontend asset-management_\] would just never come easy to me w/o deliberate engagement; and 
 
 2. those RailsGuides are _hefty:_ lot of content in there! 
 
