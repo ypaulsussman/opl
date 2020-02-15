@@ -16,7 +16,7 @@ Shortly into the project, I realized two things:
 
 As such, I expanded my initial "MVC and a bit more" app-blueprint to include each of those fields, too (_and, I'd hoped, better balance the coding-to-notetaking ratio._)
 
-I'm writing this in ~~early~~ _late_ January 2020, and ~~by my private roadmap I'm maybe 2/3 of the way done.~~ 😅 [Hey, that went better than expected! Feature-complete(ish) is running on Heroku here.](https://itsopl.herokuapp.com/quotes)
+I'm writing this in ~~early~~ _late_ January 2020, and ~~by my private roadmap I'm maybe 2/3 of the way done.~~ 😅 [Hey, that went better than expected! Feature-complete(ish) is running on Heroku here.](https://itsopl.herokuapp.com/quotes) Just ping me if you want to access it as a user/manage daily emails: signup is [currently disabled](https://github.com/ypaulsussman/opl/blob/master/app/controllers/users_controller.rb#L18) because, hey, [toy-app budget](https://github.com/ypaulsussman/opl/blob/master/config/environments/production.rb#L42).
 
 I've got a couple posts, mostly detailing my cost-benefit decisions on handrolling certain aspects vs incorporating specific gems, up at [ye olde miniblog.](https://www.suss.world/) Otherwise, should you want to play around on a copy of your own, read on...
 
