@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+
+  database:
+    image: postgres:11
+    env_file: .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    volumes: 
+      - .:/opl
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/opl/node_modules
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    depends_on:
+      - database
+    command: bash -c "rm -f tmp/pids/server.pid && env QUEUES=default,mailers bundle exec rake jobs:work"
+    volumes:
+      - .:/opl
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/opl/node_modules        # does the service need this?
+
+volumes:
+  gem_cache:
+  node_modules:
+  pgdata:
