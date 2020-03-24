@@ -45,7 +45,7 @@ I've got a couple posts, mostly detailing my cost-benefit decisions on handrolli
   - `irb(main):001:0> User.create!(name: 'Whatever', email: 'acct_you_own@example.com', password: 'my_arbitrary_password', password_confirmation: 'my_arbitrary_password', admin: true, activated: true)` in console to create admin
 - Finally, run `foreman start` to spin up your local version, and navigate to `http://localhost:5000/`!
 
-### Setup for Remote Deployment
+## Setup for Remote Deployment
 
 - `heroku create`
 - `git push heroku master`
@@ -60,7 +60,7 @@ I've got a couple posts, mostly detailing my cost-benefit decisions on handrolli
   - If you plan to add new quotes and would like them to be added in semi-randomized sequence to that email queue, set `rake populate_send_at_date_for_quotes` (_also likely best early in the AM, with the same UTC-offset caveat as above._)
   - If you set either of the above daily jobs, also set `curl #{my_heroku_app_url}` to run ~30 min after `rake send_qotd_email`, to wake up the web dyno (_and, by extension, its follower worker dyno... which will then pick up any newly-queued jobs._)
 
-### Setup for Super-Fancy (Local) Docker Usage
+## Setup for Super-Fancy (Local) Docker Usage
 
 - Checkout the `docker-demo` branch
 - Add the following keys to `config/database.yml`:
