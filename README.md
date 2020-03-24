@@ -59,3 +59,34 @@ I've got a couple posts, mostly detailing my cost-benefit decisions on handrolli
   - If you want to actually receive a daily quote by email, set `rake send_qotd_email` to run sometime in the wee hours of the AM (_careful with UTC offset; this may end up being like 9AM by scheduler-time if you're in e.g. CST/CDT_)
   - If you plan to add new quotes and would like them to be added in semi-randomized sequence to that email queue, set `rake populate_send_at_date_for_quotes` (_also likely best early in the AM, with the same UTC-offset caveat as above._)
   - If you set either of the above daily jobs, also set `curl #{my_heroku_app_url}` to run ~30 min after `rake send_qotd_email`, to wake up the web dyno (_and, by extension, its follower worker dyno... which will then pick up any newly-queued jobs._)
+
+### Setup for Super-Fancy (Local) Docker Usage
+
+- Checkout the `docker-demo` branch
+- Add the following keys to `config/database.yml`:
+
+  ```yml
+  default: &default  
+    # ...
+    host: <%= ENV['POSTGRES_HOST'] %>
+    database: <%= ENV['POSTGRES_NAME'] %>
+    port: <%= ENV['POSTGRES_PORT'] || 5432 %>
+    username: <%= ENV['POSTGRES_USER'] %>
+    password: <%= ENV['POSTGRES_PASSWORD'] %>
+  ```
+
+- Create a top-level `.env` file, and add:
+
+  ```text
+  POSTGRES_HOST=database
+  POSTGRES_NAME=opl_development
+  POSTGRES_USER=#{whatever_you_want}
+  POSTGRES_PASSWORD=#{whatever_you_want}
+  RAILS_ENV=development
+  ```
+
+- `docker-compose up`
+- `docker-compose run web rails db:prepare`
+- Navigate over to `localhost:3000`!
+
+Note that, if you (_like me_) are developing on a mid-2010's MacBook Air, this version will run _significantly_ slower than the above native build. But hey, I had to know that I _could_ convert it over...
