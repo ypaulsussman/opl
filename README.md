@@ -85,6 +85,7 @@ I've got a couple posts, mostly detailing my cost-benefit decisions on handrolli
   RAILS_ENV=development
   ```
 
+- `docker-compose build`
 - `docker-compose up`
 - `docker-compose run web rails db:prepare`
 - Navigate over to `localhost:3000`!
