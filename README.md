@@ -22,7 +22,7 @@ I've got a couple posts, mostly detailing my cost-benefit decisions on handrolli
 
 ## Setup for Local Development
 
-- Install Ruby 2.7.0 and PostgreSQL 11.5
+- Install Ruby 2.6.6 and PostgreSQL 11.5
   - There's _probably_ some leeway with the PostgreSQL version, but Heroku and Bundler, at least, certainly won't like other versions of Ruby unless tell them to.
   - I recommend grabbing [Homebrew,](https://docs.brew.sh/Installation) then running
   - `brew install rbenv`
