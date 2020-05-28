@@ -15,7 +15,7 @@ gem 'webpacker', '~> 4.0'
 # Navigate your web application faster
 gem 'turbolinks', '~> 5'
 # Provide pagination
-gem 'kaminari', '~> 1.1'
+gem 'kaminari', '~> 1.2'
 # Provide queueing for async jobs
 gem 'delayed_job_active_record', '~> 4.1'
 # Use Active Model has_secure_password
