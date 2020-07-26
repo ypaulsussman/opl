@@ -34,7 +34,6 @@ I've got a couple posts, mostly detailing my cost-benefit decisions on handrolli
 - Pull from GitHub with that beautiful green `Clone or download` button above
 - `cd` into the directory; `bundle install` and `yarn install`
 - `rails db:prepare` -- this is Rails 6, baby; we can get idempotent!
-- `rake populate_send_at_date_for_quotes` will ensure all initially-seeded quotes have a send-at date
 - _Possibly_ both `bundle exec rails webpacker:install` then `yarn install`, but likely just the latter: try it first
 - Set up db extensions:
   - `psql opl_development`, then (from within the db client) run:
@@ -44,6 +43,9 @@ I've got a couple posts, mostly detailing my cost-benefit decisions on handrolli
   - `rails c`
   - `irb(main):001:0> User.create!(name: 'Whatever', email: 'acct_you_own@example.com', password: 'my_arbitrary_password', password_confirmation: 'my_arbitrary_password', admin: true, activated: true)` in console to create admin
 - Finally, run `foreman start` to spin up your local version, and navigate to `http://localhost:5000/`!
+- NB if you encounter a `No such file or directory @ rb_sysopen - tmp/pids/server.pid (Errno::ENOENT)`, then either
+  - Run `rails s` once (and, upon hitting `localhost:3000`, exit) or
+  - Manually `mkdir tmp/pids`.
 
 ## Setup for Remote Deployment
 
