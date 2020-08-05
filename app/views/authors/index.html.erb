@@ -7,8 +7,7 @@
       { 
         method: :get, 
         params: {sort_by: 'name'}, 
-        class: 'usa-button usa-button--outline sort-toggle', 
-        disabled: (@current_sort == 'name')
+        class: "usa-button sort-toggle #{@current_sort == 'name' ? 'usa-button--default' : 'usa-button--outline'}", 
       } )%>
     <%= button_to(
       "Order by quotes", 
@@ -16,8 +15,7 @@
       { 
         method: :get, 
         params: {sort_by: 'quotes'}, 
-        class: 'usa-button usa-button--outline sort-toggle', 
-        disabled: (@current_sort == 'quotes') 
+        class: "usa-button sort-toggle #{@current_sort == 'quotes' ? 'usa-button--default' : 'usa-button--outline'}", 
       }) %>
   </div>
   <div class="grid-row">
