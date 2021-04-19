@@ -22,7 +22,7 @@ I've got a couple posts, mostly detailing my cost-benefit decisions on handrolli
 
 ## Setup for Local Development
 
-- Install Ruby 2.6.6 and PostgreSQL 11.5
+- Install Ruby 2.6.7 and PostgreSQL 12
   - There's _probably_ some leeway with the PostgreSQL version, but Heroku and Bundler, at least, certainly won't like other versions of Ruby unless tell them to.
   - I recommend grabbing [Homebrew,](https://docs.brew.sh/Installation) then running
   - `brew install rbenv`
@@ -37,7 +37,7 @@ I've got a couple posts, mostly detailing my cost-benefit decisions on handrolli
 - _Possibly_ both `bundle exec rails webpacker:install` then `yarn install`, but likely just the latter: try it first
 - Set up db extensions:
   - `psql opl_development`, then (from within the db client) run:
-  - `opl_development=# select - from pg_available_extensions;`
+  - `opl_development=# select * from pg_available_extensions;`
   - `opl_development=# CREATE EXTENSION pgcrypto;`
 - Create at least one admin account, via e.g.
   - `rails c`

@@ -3,23 +3,23 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.6'
+ruby '2.6.7'
 
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 6.1'
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.2'
 # Transpile app-like JavaScript
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.2'
 # Navigate your web application faster
-gem 'turbolinks', '~> 5'
+gem 'turbolinks', '~> 5.2'
 # Provide pagination
-gem 'kaminari', '~> 1.1'
+gem 'kaminari', '~> 1.2'
 # Provide queueing for async jobs
 gem 'delayed_job_active_record', '~> 4.1'
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.16'
 # Role models are important
 gem 'rubocop'
 
@@ -30,14 +30,14 @@ gem 'rubocop'
 gem 'sprockets', '~>3.0'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.7.3', require: false
 
 # Abort and log requests of >15 sec (recommended by Heroku)
 gem 'rack-timeout'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: [:mri]
 end
 
 group :development do
