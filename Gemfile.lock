@@ -247,7 +247,7 @@ DEPENDENCIES
   sprockets (~> 3.0)
   turbolinks (~> 5.2)
   webdrivers
-  webpacker (~> 5.2)
+  webpacker (~> 5.3)
 
 RUBY VERSION
    ruby 2.6.7p197

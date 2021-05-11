@@ -11,7 +11,7 @@ gem 'pg', '~> 1.2'
 # Use Puma as the app server
 gem 'puma', '~> 5.3'
 # Transpile app-like JavaScript
-gem 'webpacker', '~> 5.2'
+gem 'webpacker', '~> 5.3'
 # Navigate your web application faster
 gem 'turbolinks', '~> 5.2'
 # Provide pagination
