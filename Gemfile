@@ -5,11 +5,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.7'
 
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 6.1.3.2'
 # Use postgres as the database for Active Record
-gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.2'
 # Use Puma as the app server
-gem 'puma', '~> 5.2'
+gem 'puma', '~> 5.3'
 # Transpile app-like JavaScript
 gem 'webpacker', '~> 5.2'
 # Navigate your web application faster
@@ -42,11 +42,10 @@ end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Spring speeds up development by keeping your application running in the background. 
+  # Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
 end
 
 group :test do
