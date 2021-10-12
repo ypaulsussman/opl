@@ -9,7 +9,7 @@ gem 'rails', '~> 6.1.3.2'
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.2'
 # Use Puma as the app server
-gem 'puma', '~> 5.3'
+gem 'puma', '~> 5.5'
 # Transpile app-like JavaScript
 gem 'webpacker', '~> 5.2'
 # Navigate your web application faster
